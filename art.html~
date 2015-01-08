@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Christian Weeks</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="highslide/highslide.css" />
+	<script type="text/javascript" src="highslide/highslide-with-gallery.js"></script>
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		hs.graphicsDir = 'highslide/graphics/';
+		hs.align = 'center';
+		hs.transitions = ['expand', 'crossfade'];
+		hs.outlineType = 'rounded-white';
+		hs.fadeInOut = true;
+		//hs.dimmingOpacity = 0.75;
+
+		// Add the controlbar
+		hs.addSlideshow({
+			//slideshowGroup: 'group1',
+			interval: 5000,
+			repeat: false,
+			useControls: true,
+			fixedControls: 'fit',
+			overlayOptions: {
+				opacity: 0.75,
+				position: 'bottom center',
+				hideOnMouseOut: true
+			}
+		});
+	</script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+		<!-- Primary Title -->
+	<div class="container-fluid">
+		<div class=" repeatBorder" role="navigation">
+		  <div class="container">
+		    <div class="navbar-collapse collapse">
+		      <ul class="nav navbar-nav navFont">
+				<li class="darkBlue"><a href="index.html" class="navFont">Home</a></li>
+				<li class="darkRed"><a href="code.html" class="navFont">Code Portfolio</a></li>
+				<li class="darkGreen"><a href="animation.html"class="navFont">Animation Portfolio</a></li>
+				<li class="active darkYellow darkActive"><a href="art.html"style="color: black">Art Portfolio</a></li>
+		      </ul>
+		    </div>
+		  </div>
+		</div>
+	</div>
+	  <div class="container">
+	   <h1>Welcome to my Visual Portfolio.</h1>
+	   <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Environments<br /><span class="text-muted">Pen and Ink, Oil Pastel</span></h2>
+          <p class="lead" style="font-size: 30px">Environments, particularly urban and city, are one of my favourite subjects to draw.  I am most attracted to artwork with a strong sense of depth and space, something that
+			 looks like I can reach in and take part in the artists' creation.  When watching movies,  I often find myself far more interested in the setting and the fictional world itself than in the actual
+			characters or story. Pen and ink are my favourite medium here because the precision it offers is difficult to achieve in other media. The bottom row is a five piece series I made as an
+			attempt to branch out into a colored medium (oil pastels). I would love to get into matte painting.</p>
+        </div>
+        <div class="highslide-gallery">
+			<a href="images/Skyscraper.gif" class="highslide" onclick="return hs.expand(this)">
+				<img src="images/SkyscraperThumb.gif" alt="Blah" title="Click to Enlarge">
+			</a>
+			<a href="images/CooperBridge.gif" class="highslide" onclick="return hs.expand(this)">
+				<img src="images/CooperBridgeThumb.gif" alt="Blah" title="Click to Enlarge">
+			</a>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="highslide-gallery">
+			<a href="images/Construction.gif" class="highslide" onclick="return hs.expand(this)">
+				<img src="images/ConstructionThumb.gif" alt="Blah" title="Click to Enlarge">
+			</a>
+			<a href="images/CrowCity.gif" class="highslide" onclick="return hs.expand(this)">
+				<img src="images/CrowCityThumb.gif" alt="Blah" title="Click to Enlarge">
+			</a>
+			<a href="images/OrientArch.gif" class="highslide" onclick="return hs.expand(this)">
+				<img src="images/OrientArchThumb.gif" alt="Blah" title="Click to Enlarge">
+			</a>
+			<a href="images/Cathedral.gif" class="highslide" onclick="return hs.expand(this)">
+				<img src="images/CathedralThumb.gif" alt="Blah" title="Click to Enlarge">
+			</a>
+			
+			<a href="images/Metaphysics1.gif" class="highslide" onclick="return hs.expand(this)">
+				<img src="images/Metaphysics1Thumb.gif" alt="Blah" title="Click to Enlarge">
+			</a>
+			<a href="images/metaphysics2.gif" class="highslide" onclick="return hs.expand(this)">
+				<img src="images/metaphysics2Thumb.gif" alt="Blah" title="Click to Enlarge">
+			</a>
+			<a href="images/metaphysics3.gif" class="highslide" onclick="return hs.expand(this)">
+				<img src="images/metaphysics3Thumb.gif" alt="Blah" title="Click to Enlarge">
+			</a>
+			<a href="images/metaphysics4.gif" class="highslide" onclick="return hs.expand(this)">
+				<img src="images/metaphysics4Thumb.gif" alt="Blah" title="Click to Enlarge">
+			</a>
+			<a href="images/metaphysics5.gif" class="highslide" onclick="return hs.expand(this)">
+				<img src="images/metaphysics5Thumb.gif" alt="Blah" title="Click to Enlarge">
+			</a>
+		</div>
+      </div>
+
+
+      <hr class="featurette-divider">
+
+
+      <div class="row featurette">
+
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Still Lifes<br /><span class="text-muted">Oil and Acrylic</span></h2>
+          <p class="lead">While my environments show my understanding of perspective, space, line, and form, these paintings show my understanding of color and lighting.
+		  The still life to the right is an array of bright, saturated objects, and the bottom left piece has warped, over-saturated colors. Often the most difficult part of painting
+		  is finding color where there is none, so the bottom middle still lives were arranged from washed out and neutral colored objects.</p>
+        </div>
+		<div class="highslide-gallery">
+			<a href="images/StillLife3.gif" class="highslide" onclick="return hs.expand(this)">
+				<img src="images/StillLife3Thumb.gif" alt="Blah" title="Click to Enlarge">
+			</a>
+		</div>
+	  </div>
+		<div class="row">
+			<div class="highslide-gallery">
+				<a href="images/ColorChair.gif" class="highslide" onclick="return hs.expand(this)">
+					<img src="images/ColorChairThumb.gif" alt="Blah" title="Click to Enlarge">
+				</a>
+				<a href="images/OilStillLife1.jpg" class="highslide" onclick="return hs.expand(this)">
+					<img src="images/OilStillLife1Thumb.jpg" alt="Blah" title="Click to Enlarge">
+				</a>
+				<a href="images/OilStillLife2Colorless.jpg" class="highslide" onclick="return hs.expand(this)">
+					<img src="images/OilStillLife2ColorlessThumb.gif" alt="Blah" title="Click to Enlarge">
+				</a>
+				<a href="images/StillLife4.jpg" class="highslide" onclick="return hs.expand(this)">
+					<img src="images/StillLife4Thumb.gif" alt="Blah" title="Click to Enlarge">
+				</a>
+				
+			</div>
+		</div>
+    
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Illustration and Other<br /><span class="text-muted">Pen and Ink, Oil Pastel, Oil Paint</span></h2>
+          <p class="lead">These are pieces that I'd like to display but don't really fall into the above categories.  The bird to the right is an illustration of the second clause of "Thirteen Ways of looking at a Blackbird" by Wallace Stevens.
+		  The three pen and ink pieces below are illustrations of Joseph Conrad's Heart of Darkness; I discuss them in detail in my self-critique.  The last two
+		  are some of my more recent portraits.</p>
+        </div>
+		<div class="highslide-gallery">
+				<a href="images/blackBird.gif" class="highslide" onclick="return hs.expand(this)">
+					<img src="images/blackBirdThumb.gif" alt="Blah" title="Click to Enlarge">
+				</a>
+		</div>
+      </div>
+		<div class="row">
+			<div class="highslide-gallery">
+				<a href="images/HeartOfDarkness1.gif" class="highslide" onclick="return hs.expand(this)">
+					<img src="images/HeartOfDarkness1Thumb.gif" alt="Blah" title="Click to Enlarge">
+				</a>
+				<div class="highslide-caption">Pen and India Ink</div>
+				<a href="images/HeartOfDarkness2.gif" class="highslide" onclick="return hs.expand(this)">
+					<img src="images/HeartOfDarkness2Thumb.gif" alt="Blah" title="Click to Enlarge">
+				</a>
+				<div class="highslide-caption">Pen and India Ink</div>
+				<a href="images/HeartOfDarkness3.gif" class="highslide" onclick="return hs.expand(this)">
+					<img src="images/HeartOfDarkness3Thumb.gif" alt="Blah" title="Click to Enlarge">
+				</a>
+				<div class="highslide-caption">Pen and India Ink</div>
+				<a href="images/OilPortrait.gif" class="highslide" onclick="return hs.expand(this)">
+					<img src="images/OilPortraitThumb.gif" alt="Blah" title="Click to Enlarge">
+				</a>
+				<div class="highslide-caption">Oil Pastels</div>
+				<a href="images/PortraitforWeb.jpg" class="highslide" onclick="return hs.expand(this)">
+					<img src="images/PortraitforWebThumb.gif" alt="Blah" title="Click to Enlarge">
+				</a>
+				<div class="highslide-caption">Self-Portrait in Oil Paints.  I don't know why I'm not smiling!</div>
+				
+			</div>
+		</div>
+      	<hr class="featurette-divider">
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+		<footer>
+			<div class="container" style="padding-top: 40px;padding-bottom: 10px;">
+				<div class="row"> 
+					<div class="col-md-6" align="center"><i>Contact:</i><br/>caweeks@g.clemson.edu<br/>843.709.1595</div>
+					<div class="col-md-6" align-"center"><i>Github:</i><br/><a href="https://github.com/ChristianWeeks">www.github.com/ChristianWeeks</a></div>
+				</div>
+			</div>
+			<div class="container-fluid ">
+				<div class="row repeatBorder" style="height: 40px"></div>
+			</div>
+		</footer>
+    </body>
+</html>
