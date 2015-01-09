@@ -14,34 +14,34 @@
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="highslide/highslide.css" />
-	<script src="js/vendor/jquery-1.10.2.min.js"></script>
-	<script type="text/javascript" src="highslide/highslide-with-gallery.js"></script>
-    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script type="text/javascript">
-		hs.graphicsDir = 'highslide/graphics/';
-		hs.align = 'center';
-		hs.transitions = ['expand', 'crossfade'];
-		hs.outlineType = 'rounded-white';
-		hs.fadeInOut = true;
-		//hs.dimmingOpacity = 0.75;
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="highslide/highslide.css" />
+		<script src="js/vendor/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="highslide/highslide-with-gallery.js"></script>
+		<script src="js/vendor/modernizr-2.6.2.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			hs.graphicsDir = 'highslide/graphics/';
+			hs.align = 'center';
+			hs.transitions = ['expand', 'crossfade'];
+			hs.outlineType = 'rounded-white';
+			hs.fadeInOut = true;
+			//hs.dimmingOpacity = 0.75;
 
-		// Add the controlbar
-		hs.addSlideshow({
-			//slideshowGroup: 'group1',
-			interval: 5000,
-			repeat: false,
-			useControls: true,
-			fixedControls: 'fit',
-			overlayOptions: {
-				opacity: 0.75,
-				position: 'bottom center',
-				hideOnMouseOut: true
-			}
-		});
-	</script>
+			// Add the controlbar
+			hs.addSlideshow({
+				//slideshowGroup: 'group1',
+				interval: 5000,
+				repeat: false,
+				useControls: true,
+				fixedControls: 'fit',
+				overlayOptions: {
+					opacity: 0.75,
+					position: 'bottom center',
+					hideOnMouseOut: true
+				}
+			});
+		</script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -56,8 +56,8 @@
 		    <div class="navbar-collapse collapse">
 		      <ul class="nav navbar-nav navFont">
 				<li class="darkBlue"><a href="index.html" class="navFont">Home</a></li>
+				<li class="navFont darkGreen"><a href="demoReel.html"class="navFont">Demo Reel</a></li>
 				<li class="active darkRed darkActive"><a href="code.html" style="color: black">Code</a></li>
-				<li class="darkGreen"><a href="animation.html"class="navFont">Animation</a></li>
 				<li class="darkYellow"><a href="art.html"class="navFont">Art</a></li>
 		      </ul>
 		    </div>
@@ -104,7 +104,7 @@
 			</div>
 		</div> -->
 		<div class="row repeatBorderSmall" style="height: 20px"></div>
-
+		<a id="vis"></a>
 	    <h1>Javascript</h1>
 	    <hr class="featurette-divider">
 		<div class="row featurette">
@@ -153,7 +153,7 @@
 			<div class="col-md-7 displayRow.lg">
 				<h2 class="featurette-heading">Interactive Sentimented Word Clouds</h2>
 				<p>Designed to be a more interactive and engaging word cloud, this visualization reads in large volumes of sentimented twitter data from an elasticsearch database and then creates force-directed word clouds for words with positive, negative, and neutral sentiment.  Mousing over nodes shows connections between the same words in different clouds and shows the total percent that word makes up out of all positive/negative/neutral tweets.</p>
-				<p>This code is part of a larger visualization project that does not belong to me, so I can not host it on Github.</p>
+				<p>This code is part of a larger visualization project that does not belong to me, so I cannot make the source code publicly available.</p>
 			</div>
 			<div class="col-md-4">
 				<div class="row">
@@ -190,6 +190,7 @@
 				</div>
 			</div>
 		</div>
+		<!--
 		<div class="row repeatBorderSmall" style="height: 20px"></div>
 	    <h1>Java (Processing)</h1>
 	    <hr class="featurette-divider">
@@ -198,7 +199,7 @@
 				<h2 class="featurette-heading">2-D Image Morpher</h2>
 				<p>An implementation of the marching squares algorithm (the 2-D version of the <a href="SOURCEHERE">Marching Cubes</a> algorithm), this program
 			</div>
-		</div>
+		</div>-->
 	</div>
 
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
