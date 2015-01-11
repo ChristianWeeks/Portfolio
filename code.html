@@ -75,34 +75,44 @@
 				<a href="https://github.com/ChristianWeeks/416-SDL-Game"><img src="images/GitHub_Logo.png" class="gitLogo"/>  All assets available on Github</a>
 			</div>	
 			<div class="col-md-5 displayRow.lg">
-				<iframe src="https://player.vimeo.com/video/115582725" width="267" height="200" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/115582725">gameMovie</a> from <a href="http://vimeo.com/user24120911">Christian Weeks</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+				<iframe src="https://player.vimeo.com/video/115582725" width="267" height="200" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
 			</div>
 		</div>
-<!--		<div class="row featurette">
+	   <hr class="featurette-divider">
+		<div class="row featurette">
 			<div class="col-md-7">
 				<h2 class="featurette-heading">2-D Image Morpher</h2>
-				<p>This program implements the Beier-Neely algorithm for image morphing.  The user picks corresponding anchor points on each image in a GUI and the algorithm then outputs a 48 frame transition between the two images. </p>
+				<p>This program implements the <a href="http://www1.cs.columbia.edu/~cs4162/slides/p35-beier.pdf">Beier-Neely algorithm</a> for image morphing.  It will take two images as input and create a "morph" transition between the two by marking corresponding features (like eyes, nose, mouth) on each image.  The user picks corresponding anchor points on each image in a GUI and the algorithm then outputs a 48 frame transition between the two images. </p>
+
 			</div>
-			<div class="col-md-5 displayRow">
-				<div class="highslide-gallery">
-				<a href="images/PantherCheetahAnchors.png" class="highslide"  onclick="return hs.expand(this)">
-					<img src="images/PantherCheetahAnchorsThumb.png" alt="Blah" title="Click to Enlarge">
-				</a>
-				<div class="highslide-caption">The anchor configuration for the panther to cheetah image morph</div>
-				<a href="images/tigerLeopardAnchors.png" class="highslide" onclick="return hs.expand(this)">
+			<div class="col-md-5 displayRow"><iframe src="https://player.vimeo.com/video/83781536" width="267" height="200" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+			<!--<a href="images/tigerLeopardAnchors.png" class="highslide" onclick="return hs.expand(this)">
 					<img src="images/tigerLeopardAnchorsThumb.png" alt="Blah" title="Click to Enlarge">
 				</a>
-				<div class="highslide-caption">The anchor configuration for the tiger to leopard image morph</div>	
+				<div class="highslide-caption">The anchor configuration for the tiger to leopard image morph</div>-->	
 			</div>
 		</div>
+	   <a id="ray"></a>
+	   <hr class="featurette-divider">
 		<div class="row featurette">
 			<div class="col-md-7">
 				<h2 class="featurette-heading">Ray Tracer</h2>
-				<p>One of the earlier projects in my college career, ray tracer reads in a document containing the coordinates and properties of objects in the scene.  Outputs a single ray traced image of the scene.</p>
+				<p>This ray tracer reads in a document containing the coordinates and properties of objects in the scene.  Outputs a single ray traced image of the scene.  The project was written purely in C in a pseudo object oriented fashion that organizes objects into many structures and files.  An object's members are accessed with pointers.</p>
 			</div>	
-			<div class="col-md-5 displayRow">
+			<div class="col-md-5">
+				<div class="row">
+					<div class="col-md-3"></div>
+					<div class="col-md-6 displayRow">
+						<a href="images/rayTracer1.jpeg" class="highslide displayImg" onclick="return hs.expand(this)">
+							<div class="displayCell sm displayColorYellow">
+								<img src="images/rayTracer1.jpeg" class="displayImg" alt="Blah" title="Click to Enlarge">
+							</div>
+						</a>
+					</div>
+					<div class="col-md-3"></div>
+				</div>
 			</div>
-		</div> -->
+		</div> 
 		<div class="row repeatBorderSmall" style="height: 20px"></div>
 		<a id="vis"></a>
 	    <h1>Javascript</h1>
@@ -112,6 +122,7 @@
 				<h2 class="featurette-heading">DPAView - Interactive Pipeline Visualization</h2>
 				<p>There are over 250,000 archived logs of tasks submitted to Clemson's production pipeline in the past year and a half. DPAView is an interactive web visualization that allows users to view and sort the data in order to tell if the pipeline is operating as it should.  Users can view things like the average time a machine takes to execute a task or the total tasks submitted by different users.  It also has a time view that shows how these attributes change over time.</p> 
 				<a href="https://github.com/ChristianWeeks/DPAView/tree/master/finalProject"><img src="images/GitHub_Logo.png" class="gitLogo"/>  All assets available on Github</a>
+				<p><img src="images/D3.js-Logo.png" style="height: 40%; width: 40%;"/></p>
 			</div>
 			<div class="col-md-4">
 				<div class="row">
@@ -154,6 +165,7 @@
 				<h2 class="featurette-heading">Interactive Sentimented Word Clouds</h2>
 				<p>Designed to be a more interactive and engaging word cloud, this visualization reads in large volumes of sentimented twitter data from an elasticsearch database and then creates force-directed word clouds for words with positive, negative, and neutral sentiment.  Mousing over nodes shows connections between the same words in different clouds and shows the total percent that word makes up out of all positive/negative/neutral tweets.</p>
 				<p>This code is part of a larger visualization project that does not belong to me, so I cannot make the source code publicly available.</p>
+				<p><img src="images/D3.js-Logo.png" style="height: 40%; width: 40%;"/></p>
 			</div>
 			<div class="col-md-4">
 				<div class="row">

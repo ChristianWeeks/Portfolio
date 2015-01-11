@@ -74,6 +74,18 @@
 				</div>
 				<div class="col-md-8">
 					<h1 align="center">Breakdown</h1>
+					<h2>Animation </h2>
+					<p> I chose Hades' audio from Disney's Hercules because his character is extremely expressive and the way fire is used to amplify his emotions was an excellent way for me to package expressive animation and special effects in a very short segment.  </p>
+					<h2>Effects</h2>
+					<p>I used Maya fluids to create the fire effect.  Select parts of the head geometry, like the tips of the horns and the shoulder ridge, were duplicated to act as emitters.  Their emission rates were keyframed to increase and decrease with the character's emotions.  Many other attributes were altered and keyframed to make the fire more compelling, like the buoyancy rate of the particles and their initial velocities.  The input bias of the fire's incandescence attribute was also keyframed to make the fire appear blue-hot when the character is particularly angry.</p>
+					<h2>Modeling</h2>
+					<p>My character is loosely inspired by Lion from the game Dota 2.  I used him as a reference to block out the construction of the face before adding original features like the horns and (eventually) the flames.  I created the mesh by using the create polygon tool to create the contour of the face and the major loops around the eyes, nose, and mouth.  I then filled in all of the holes as effectively as possible using many different tools like bridge, extrude, fill hole, interactive split tool, etc..  I tried to keep triangles to a minimum, and there were only two I couldn't eliminate: one behind the ear, and one on the crease of the nostril.</p>
+					<h2>Rigging</h2>
+					<p>I placed nurbs curves along all of the major curves of the face (eyebrows, eyelids, cheeks, lips, etc.) and then bound joints to all of these curves using locators.  This method allowed me to create many different blend shapes that would only effect a single part of the face at a time, allowing for many different dynamic combinations.  Controls were then created for each blend shape using expressions</p>
+					<h2>2-D Game Design</h2>
+					<p>This game was built from the ground up using the C++ SDL library.  It is one of the larger coding projects I have built, so adhering to strict OOP principles was a necessity.  Multiple design patterns were used as well; for instance, the factory was used to instantiate the frames and artwork for the world and the characters, and the observer was used to check for collision.  Game world variables, like the locations of enemies and the screen resolution, are stored in an xml document so they can be altered without having to recompile.  I am responsible for all aspects, code and artwork, of this project.</p>
+					<h2>Ray Tracer</h2>
+					<p></p>
 				</div>
 				<div class="col-md-2">
 				</div>
