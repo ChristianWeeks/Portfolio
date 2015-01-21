@@ -1,0 +1,51 @@
+html {
+	font-family: Helvetica;
+}
+.button{
+	fill-opacity: .6;
+	stroke-opacity: .6;
+
+}
+
+.button.active{
+	fill: #FF530F;
+	stroke: #FF530F;
+	stroke-width: 8;
+}
+.button.mouseOver{
+	fill: #0DE488;
+	stroke: #0DE488;
+/*	stroke-width: 6;*/
+
+
+}
+
+.button.neutral{
+	fill: #1B8AE0;
+	stroke: #1B8AE0;
+/*	stroke-width: 4;*/
+}
+
+.startMonth{
+
+}
+
+.endMonth{
+
+}
+
+.butText{
+
+}
+
+.graphTitle{
+
+}
+
+.loadingText{
+
+}
+
+.axisLabels{
+
+}

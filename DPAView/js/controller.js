@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------------------------
 //GLOBALS
 //------------------------------------------------------------------------------------------------
-var svgWidth = 1400;
+var svgWidth = 1600;
 var svgHeight = 900;
 var yPadding = 350;
 var xPadding = 300;
@@ -9,12 +9,28 @@ var graphWidth = svgWidth - xPadding;
 var graphHeight = svgHeight - yPadding;
 var monthButtonSize = 50
 var currMonth = null;
+//records what options are currently active.  Used to keep the proper buttons highlighted to show the user what is influencing the current graph
+var ACTIVE_OPTIONS = {
+	"month": "month10",
+	"sort" : false,
+	"attr" : "totalTasks",
+	"dataSet" : "computers",
+	"timeview": false
+};
 //Creating the primary SVG canvas
 var svg = d3.select("body").append("svg")
-	.style("width", svgWidth)
-	.style("height", svgHeight)
+	.style("height", "100%")
+	.style("width", "100%")
+	.attr("color", "red")
 	.attr("viewBox", "0 0 " + svgWidth + " " + svgHeight)
 	.attr("preserveAspectRatio", "xMidYMid");
+function updateWindow(){
+	x = window.innerWidth || document.documentElement.clientWidth || d.getElementsByTagName('body')[0].clientWidth;
+	y = window.innerHeight || document.documentElement.clientHeight || d.getElementsByTagName('body')[0].clientHeight;
+	svg.attr("width", x).attr("height", y - 120);
+}
+updateWindow();
+window.onresize = updateWindow;
 //------------------------------------------------------------------------------------------------
 //BUTTONS
 //------------------------------------------------------------------------------------------------
@@ -35,7 +51,7 @@ svg.append("text")
 	.attr("font-size", 18)
 	.text("Graph Attribute:");
 for(var i = 0; i < attributeButtonData.length; i++){
-	attributeButtons[i] = new buttonWidget((xPadding / 2) + graphWidth + 10, yPadding + i*40, 120, 30, attributeButtonData[i]["attrStr"], setGraphAttr(attributeButtonData[i]), svg, 16);
+	attributeButtons[i] = new buttonWidget((xPadding / 2) + graphWidth + 10, yPadding + i*40, 120, 30, attributeButtonData[i]["attrStr"], setGraphAttr(attributeButtonData[i]), svg, 16, "attrButton", attributeButtonData[i]["attr"]);
 }
 
 //Month Buttons will read in the log files from the corresponding month
@@ -53,7 +69,13 @@ var monthButtonData = [
 	];
 var monthButtons = new Array(10);
 for(var i = 0; i < 10; i++){
-	monthButtons[i] = new buttonWidget(xPadding + 120 + 60 * i, 10, monthButtonSize, monthButtonSize, monthButtonData[i]["monthStr"], readMonthJson(monthButtonData[i]["numStr"]), svg, 24);
+	console.log(i.toString());
+	var monthStr = "month";
+	if (i == 9)
+		monthStr += (i+1);
+	else
+		monthStr += "0" + (i+1);
+	monthButtons[i] = new buttonWidget(xPadding + 120 + 60 * i, 10, monthButtonSize, monthButtonSize, monthButtonData[i]["monthStr"], readMonthJson(monthButtonData[i]["numStr"]), svg, 24, "butMonth" , monthStr);
 }
 
 
@@ -64,8 +86,8 @@ svg.append("text")
 	.attr("fill", "black")
 	.attr("font-size", 18)
 	.text("Data Pool:", svg, 24);
-var displayComputers = new buttonWidget(xPadding / 2, 30, 90, 30, "Machines", graphByComputer, svg, 20);
-var displayUsers = new buttonWidget(xPadding / 2, 70,  90, 30, "Users", graphByUser, svg, 20);
+var displayComputers = new buttonWidget(xPadding / 2, 30, 90, 30, "Machines", graphByComputer, svg, 20, "dataSet", "computers");
+var displayUsers = new buttonWidget(xPadding / 2, 70,  90, 30, "Users", graphByUser, svg, 20, "dataSet", "users");
 
 //Sort buttons allow the user to sort alphabetically or by the currently graphed attribute value
 svg.append("text")
@@ -74,11 +96,11 @@ svg.append("text")
 	.attr("fill", "black")
 	.attr("font-size", 18)
 	.text("Sort By:", svg, 24);
-var sortByValueButton = new buttonWidget(xPadding / 2 + 150, 30, 90, 30, "Value", sortByValue, svg, 20);
-var sortByAlphabetButton = new buttonWidget(xPadding / 2 + 150, 70, 90, 30, "Name", sortByName, svg, 20);
+var sortByValueButton = new buttonWidget(xPadding / 2 + 150, 30, 90, 30, "Value", sortByValue, svg, 20, "sortButton", "sortByVal");
+var sortByAlphabetButton = new buttonWidget(xPadding / 2 + 150, 70, 90, 30, "Name", sortByName, svg, 20, "sortButton", "sortByName");
 
 //TimeView button lets the user switch between having computers / users on the x axis, and having time on the x axis
-var timeViewButton = new buttonWidget(1050, 50, 150, monthButtonSize, "TimeView", activateTimeView, svg, 24);
+var timeViewButton = new buttonWidget(1050, 50, 150, monthButtonSize, "TimeView", activateTimeView, svg, 24, "timeview", "timeview");
 userData = null;
 taskData = null;
 computerData = null;
@@ -97,10 +119,35 @@ var monthMap = {
 	"09" : "September",
 	"10" : "October"};
 
-function main(){
+
+function main(){	
 	readDataByMonth("10");
 }
 function readDataByMonth(month){
+
+	//resetting all button classes
+	console.log(d3.selectAll(".button").attr("class", "button neutral"));
+	//resetting currently active options
+	ACTIVE_OPTIONS["sort"] = null;
+	ACTIVE_OPTIONS["timeview"] = false;
+	ACTIVE_OPTIONS["dataSet"] = "computers";
+	ACTIVE_OPTIONS["attr"] = "totalTasks";
+	
+	//now setting the current month button to active
+	var activeMonthName = "month" + month;
+	ACTIVE_OPTIONS["month"] = activeMonthName;
+	d3.selectAll("[name='" + activeMonthName + "']").attr("class", "button active");
+	d3.selectAll("[name='" + ACTIVE_OPTIONS["dataSet"] + "']").attr("class", "button active");
+	d3.selectAll("[name='" + ACTIVE_OPTIONS["attr"] + "']").attr("class", "button active");
+	//let the user know the data is loading
+	var loadingText = svg.append("text")
+		.attr("id", "loadingText")
+		.attr("x", (xPadding / 2) + graphWidth  / 2)
+		//.attr("y", (svgHeight-(yPadding / 2)) + (svgHeight-yPadding)/2)
+		//.attr("x", 500) 
+		.attr("y", 500)
+		.attr("text-anchor", "middle")
+		.text("Loading Pipeline Data...");
 	//first we read in the data
 	d3.json("logs/2014-"+month+"_tasks.json", function(error, taskData){
 		if(error)
@@ -111,6 +158,8 @@ function readDataByMonth(month){
 			d3.json("logs/2014-"+month+"_users.json", function(error, userData){
 				if(error)
 					console.log("Error reading user json data: " + error);
+				
+				d3.selectAll("#loadingText").remove();
 				//Assigning our new data to objects so we can manipulate them
 				userDataObj = userData;
 				computerDataObj = computerData;
@@ -149,6 +198,13 @@ d3.selection.prototype.moveToFront = function() {
 	return this.each(function(){
 		this.parentNode.appendChild(this);
 	});
+};
+getKeyByValue = function(value, obj) {
+    for(var prop in obj ) {
+		 if(obj[prop] == value)
+			 return prop;	
+    }
+	return 0;	
 };
 main();
 
