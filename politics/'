@@ -115,7 +115,6 @@ graphObject.prototype.setYAttr = function (){
 		else
 			cssClass = "ind";
 		this.currentlyViewedData[i] = {
-			"data": this.data[i],
 			"id": this.data[i].id,
 			"name": this.data[i].name,
 			//index and sortedOrder are used to sort the xData without altering the original order of the data.  Transitions would not be possible
@@ -387,25 +386,18 @@ function elementMouseOverClosure(){
 			x2: d.x,
 			y2: MAIN_GRAPH.y,
 			class: d.cssClass
-		})
-		.style("opacity", 0);
+		}).style("opacity", 0);
 		d.svgYTrace = d3.select("#mainCanvas").append("line").attr({
 			x1: d.x,
 			y1: d.y,
 			x2: MAIN_GRAPH.x,
 			y2: d.y,
 			class: d.cssClass
-		})
-		.style("opacity", 0);
+		});
 		d3.select(d.svgPopup).moveToFront();
 		d3.select(d.svgPoint).moveToFront();
 		d3.select(d.svgPopup).transition().style("opacity", 1);
 		d3.select(d.svgPoint).transition().attr("r", 15);
-		d.svgXTrace.transition().style("opacity",1);
-		d.svgYTrace.transition().style("opacity",1);
-		var sideBarTop = d3.select("#sideBar1").attr("class", d.cssClass +"Box sideBox");
-		console.log(d);
-		document.getElementById("sideBar1").innerHTML = "<h3>" + d.name + "</h3><h3>" + d.id + "</h3>";
 	}
 	return elementMouseOver;
 }
@@ -415,8 +407,6 @@ function elementMouseOutClosure(){
 	var elementMouseOut = function(d, i){
 		d3.select(d.svgPopup).transition().style("opacity", 0);
 		d3.select(d.svgPoint).transition().attr("r", 8);
-		d.svgXTrace.transition().style("opacity",0);
-		d.svgYTrace.transition().style("opacity",0);
 		d.svgXTrace.remove();
 		d.svgYTrace.remove();
 		

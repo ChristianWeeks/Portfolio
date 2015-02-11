@@ -2,26 +2,31 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<script src="js/d3.v3.js"></script>
-		<script src="js/nv.d3.js"></script>
-		<script src="js/jquery-1.11.2.min.js"></script>
+		<script src="js/dependencies/d3.v3.js"></script>
+		<script src="js/dependencies/jquery-1.11.2.min.js"></script>
+		<script src="js/dependencies/bootstrap.min.js"></script>
+		<script src="js/dependencies/plugins.js"></script>
 		<script src="js/graphObject.js"></script>
 		<title>Speech Visualization - Draft</title>
 		<h1 align="center">Speech Visualization - Draft</h1>	
 		<link rel="stylesheet" href="css/main.css">
-		<link rel="stylesheet" href="css/nv.d3.css">
-
-
-
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 	</head>
 	<body>
-
-		<div align="center" id="nvChart">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9">
+					<div align="left" id="selfChart">
+					</div>
+				</div>
+				<div class="col-md-3" id="sideBar">
+					<div class="row" id="sideBar1" align="center">
+					</div>
+					<div class="row" id="sideBar2">
+					</div>
+				</div>
+			</div>
 		</div>
-		<div align="center" id="selfChart">
-		</div>
-		<script src="js/nvTest.js"></script>
 		<script src="js/controller.js"></script>
-		<!--	<script src="js/test.js"></script>-->
 	</body>
 </html>

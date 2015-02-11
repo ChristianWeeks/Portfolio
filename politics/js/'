@@ -5,7 +5,7 @@ var yPadding = 150;
 var chartWidth = svgWidth - xPadding; 
 var chartHeight = svgHeight - yPadding; 
 var MAIN_GRAPH = null;
-d3.select("#sideBar1").style("height", (svgHeight/2) + "px");
+d3.select("#sideBar").attr("height", svgHeight + "px");
 var svg = d3.select("#selfChart").append("svg")
 	.style("height", svgHeight)
 	.style("width", svgWidth)

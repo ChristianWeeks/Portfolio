@@ -1,9 +1,55 @@
 html {
 	font-family: Helvetica;
 }
+
+:root {
+	repC1: #DAA;
+	repC2: #F22;
+	demC1: #44A;
+	demC2: #22F;
+	indC1: #AAA;
+	indC2: #555
+}
+.rep{
+	fill: #FAA;
+	stroke: #F22; 
+	stroke-width: 2px;
+}
+
+.sideBox{
+	border-radius: 10px;
+}
+.repBox{
+	background:#FAA;
+}
+.demBox{
+	background:#AAF;
+}
+.indBox{
+	background:#CAC;
+}
+
+.dem{
+	fill: #AAF;
+	stroke: #22F;
+	stroke-width: 2px;
+}
+.ind{
+	fill: #CAC;
+	stroke: #656;
+	stroke-width: 2px;
+}
+
 .button{
 	fill-opacity: .6;
 	stroke-opacity: .6;
+
+}
+
+.Title{
+
+}
+.axisTitle{
 
 }
 
