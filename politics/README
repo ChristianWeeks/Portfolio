@@ -1,0 +1,16 @@
+TODO:
+
+***Make graph dynamically resizeable
+
+***Store buffer lengths of x and y tick labels, so axes labels never collide with them
+
+***create an SVG GROUP object that contains a vector of svgs.  On mouseover, the SVG GROUP will
+activate the mouseover effects of each svg in the vector.  This will conveniently allow for multiple
+svgs to interact with eachother, without creating a mouseover closure that involves all of them.
+It will also allow for svg items to be added and removed just by putting them in / out of the group.
+
+***make a gradient of sort for x and y axes to go along with "more conservative, more liberal" labels.  Maybe un-needed
+
+***get more data so mouseover can properly fill out the info box on the side
+
+***add confidence intervals to each point

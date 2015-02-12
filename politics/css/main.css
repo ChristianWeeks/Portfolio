@@ -29,6 +29,16 @@ html {
 	background:#CAC;
 }
 
+.demText{
+	font-size: 18px;
+	fill: #AAF;
+	opacity: 1;
+}
+.repText{
+	fill: #FAA;
+	opacity: 1;
+}
+
 .dem{
 	fill: #AAF;
 	stroke: #22F;

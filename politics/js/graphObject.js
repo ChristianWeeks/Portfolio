@@ -197,6 +197,7 @@ graphObject.prototype.draw = function(){
 	//BarGraph xTicks are drawn even in time view because they will shift down to act as a legend for the new line graph
 	//These draw functions are independent of whether it is time view or bar view
 	this.drawAxesLabels();
+	this.drawAxesLegends();
 	this.drawAxes();
 
 
@@ -374,6 +375,56 @@ graphObject.prototype.drawPopups = function(){
 			y: function(d){ return d.y - 15;}
 		})
 		.text(function(d){ return d.name});
+}
+
+graphObject.prototype.drawAxesLegends = function() {
+	var textData = [
+		{
+		text: "Liberal Rhetoric", 
+		x: this.x - 50,
+		y: this.y,
+		cssClass: "demText",
+		align: "vertical"},
+		{
+		text: "Conservative Rhetoric",
+		x: this.x - 50,
+		y: this.y - this.height,
+		cssClass: "repText",
+		align: "vertical"},
+		{
+		text: "Liberal Voter",
+		x: this.x,
+		y: this.y + 50,
+		cssClass: "demText",
+		align: "horizontal"},
+		{
+		text: "Conservative Voter",
+		x:this.x + this.width,
+		y: this.y + 50,
+		cssClass: "repText",
+		align: "horizontal"},
+	];
+
+	this.axesLegends = this.svgPointer.selectAll("axesLegend")
+		.data(textData)
+		.enter()
+		.append("text")
+		.attr("text-anchor", "middle")
+		.attr("alignment-baseline", "middle")
+		.attr({ 
+			class: function(d){return d.cssClass;},
+			x: function(d){return d.x;},
+			y: function(d){return d.y;},
+			transform: function(d){
+				if (d.align == "vertical")
+					return "rotate(-90 " + d.x + " " + d.y + ")";
+				return "rotate(0 0 0)";
+			},
+			id: "axesLegend"})
+		.text(function(d){return d.text});
+	console.log("HELLO");
+		
+	return this;
 }
 
 //Closure needed to have multiple svg-elements activate (highlight) when any one of them is highlighted
