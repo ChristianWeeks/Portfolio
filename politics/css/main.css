@@ -30,12 +30,13 @@ html {
 }
 
 .demText{
-	font-size: 18px;
-	fill: #AAF;
+	font-size: 20px;
+	fill: #88F;
 	opacity: 1;
 }
 .repText{
-	fill: #FAA;
+	font-size: 20px;
+	fill: #F88;
 	opacity: 1;
 }
 
@@ -60,7 +61,9 @@ html {
 
 }
 .axisTitle{
-
+	fill: #000;
+	stroke-weight: "bold";
+	font-size: 30px;
 }
 
 .button.active{

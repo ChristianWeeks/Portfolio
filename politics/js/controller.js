@@ -1,5 +1,5 @@
 var svgWidth = 900;
-var svgHeight = 600;
+var svgHeight = 700;
 var xPadding = 150;
 var yPadding = 150;
 var chartWidth = svgWidth - xPadding; 
@@ -8,7 +8,7 @@ var MAIN_GRAPH = null;
 d3.select("#sideBar1").style("height", (svgHeight/2) + "px");
 var svg = d3.select("#selfChart").append("svg")
 	.style("height", svgHeight)
-	.style("width", svgWidth)
+	.style("width", "100%")
 	.attr("id", "mainCanvas")
 	.attr("viewBox", "0 0 " + svgWidth + " " + svgHeight)
 	.attr("preserveAspectRatio", "xMidYMid");
@@ -49,9 +49,9 @@ function main(){
 				console.error(error);
 
 			var graphData = configureData(senateData);
-			MAIN_GRAPH = new graphObject(xPadding - 30, svgHeight-(yPadding / 2) - 30, svgWidth - xPadding, svgHeight-yPadding, svg);
+			MAIN_GRAPH = new graphObject(xPadding * 2 / 3, svgHeight-(yPadding / 2) - 30, svgWidth - xPadding, svgHeight-yPadding, svg);
 			MAIN_GRAPH.setTitleY("Speech Position");
-			MAIN_GRAPH.setTitleX("Vote Positions");
+			MAIN_GRAPH.setTitleX("Vote Position");
 			MAIN_GRAPH.setData(graphData);
 
 	

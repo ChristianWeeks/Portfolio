@@ -237,8 +237,7 @@ graphObject.prototype.drawPoints= function(){
 graphObject.prototype.drawAxesLabels = function(){
 	//main title
 	this.title = this.svgPointer.append("text")
-		.style("fill", "black")
-		.style("font-weight", "bold")
+		.attr("class", "axisTitle")
 		.style("font-size", 40)
 		.attr("text-anchor", "middle")
 		.attr({
@@ -248,21 +247,17 @@ graphObject.prototype.drawAxesLabels = function(){
 		.text(this.titleY + " by " + this.titleX);
 	//label for the y axis
 	this.yAxisLabel = this.svgPointer.append("text")
-		.style("fill", "black")
-		.style("font-weight", "bold")
-		.style("font-size", 24)
+		.attr("class", "axisTitle")
 		.attr("text-anchor", "middle")
 		.attr({
-			x: this.x / 2,
+			x: this.x/3,
 			y: this.y - this.height / 2
 		})
-		.attr("transform", "rotate(-90 " + (this.x/2) + ", " + (this.y - this.height / 2) + ")")
+		.attr("transform", "rotate(-90 " + (this.x/3) + ", " + (this.y - this.height / 2) + ")")
 		.text(this.titleY);
 	//label for the x axis
 	this.xAxisLabel = this.svgPointer.append("text")
-		.style("fill", "black")
-		.style("font-weight", "bold")
-		.style("font-size", 30)
+		.attr("class", "axisTitle")
 		.attr("text-anchor", "middle")
 		.attr({
 			x: this.x  + this.width / 2,
@@ -343,8 +338,6 @@ graphObject.prototype.drawAxes = function() {
 		.attr("alignment-baseline", "middle")
 		.style("fill", "black")
 		.attr({
-			//align: "right",
-			//valign: "center",
 			x: this.x - 12,
 			y: function(d){ return d.loc}
 		})
@@ -359,48 +352,32 @@ graphObject.prototype.drawAxes = function() {
 		});
 }
 
-//creates the text boxes that pop up when users mouse over a bar.  The text displays the exact value of that bar.
-graphObject.prototype.drawPopups = function(){
-	this.popups  = this.svgPointer.selectAll("popUps")
-		.data(this.currentlyViewedData)
-		.enter()
-		.append("text")
-		.attr("id", "popup")
-		.style("fill", "black")
-		.style("opacity", 0)
-		.attr("text-anchor", "middle")
-		.attr("alignment-baseline", "middle")
-		.attr({
-			x: function(d){ d.svgPopup = this; return d.x;},
-			y: function(d){ return d.y - 15;}
-		})
-		.text(function(d){ return d.name});
-}
-
 graphObject.prototype.drawAxesLegends = function() {
+	var xLabelPadding = 55;
+	var yLabelPadding = 55;
 	var textData = [
 		{
 		text: "Liberal Rhetoric", 
-		x: this.x - 50,
-		y: this.y,
+		x: this.x - yLabelPadding,
+		y: this.y - this.height/8,
 		cssClass: "demText",
 		align: "vertical"},
 		{
 		text: "Conservative Rhetoric",
-		x: this.x - 50,
-		y: this.y - this.height,
+		x: this.x - yLabelPadding,
+		y: this.y - this.height*7/8,
 		cssClass: "repText",
 		align: "vertical"},
 		{
 		text: "Liberal Voter",
-		x: this.x,
-		y: this.y + 50,
+		x: this.x + this.width/8,
+		y: this.y + xLabelPadding,
 		cssClass: "demText",
 		align: "horizontal"},
 		{
 		text: "Conservative Voter",
-		x:this.x + this.width,
-		y: this.y + 50,
+		x: this.x + this.width*7/8 ,
+		y: this.y + xLabelPadding,
 		cssClass: "repText",
 		align: "horizontal"},
 	];
@@ -456,7 +433,8 @@ function elementMouseOverClosure(){
 		d.svgYTrace.transition().style("opacity",1);
 		var sideBarTop = d3.select("#sideBar1").attr("class", d.cssClass +"Box sideBox");
 		console.log(d);
-		document.getElementById("sideBar1").innerHTML = "<h3>" + d.name + "</h3><h3>" + d.id + "</h3>";
+		document.getElementById("sideBar1").innerHTML = "<h3>" + d.name + "</h3><h2>Years in Office</h2><h3>" + d.id + "</h3>" + "<h3>IMAGE GOES HERE</h3>";
+		document.getElementById("sideBar2").innerHTML = "<h2>Personal information</h2><h2>Wikipedia Link</h2><p>???Vote History???</p><p>???Speech History???</p>";
 	}
 	return elementMouseOver;
 }
