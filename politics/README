@@ -25,6 +25,8 @@ they compare to others
 
 ***Decide how values will pop up- will they appear on axes, or on the side bar with everything else?
 
+***Normalize data values to be between 0 and 1
+
 OPTIONS:
 ***Turn confidence intervals on or off
 

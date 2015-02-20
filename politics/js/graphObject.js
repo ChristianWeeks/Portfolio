@@ -11,10 +11,10 @@ graphObject = function(x, y, width, newHeight, svg){
 	//yLen is the number of steps on the y axis, including 0
 	this.yLen = 7;
 	this.xLen = 5;
-	this.yMax = 1.5;
-	this.yMin = -1.5;
-	this.xMax = 1;
-	this.xMin = 0;
+	this.yMax = 2;
+	this.yMin = -2;
+	this.xMax = 3; 
+	this.xMin = -3;
 
 	this.topPadding = 30 
 	this.currentlyViewedData = null;
@@ -51,9 +51,11 @@ graphObject = function(x, y, width, newHeight, svg){
 
 //maps from canvas space to graph space
 graphObject.prototype.mapYValToGraph = function(yVal){
+	yVal -= this.yMin;
 	return this.y - (yVal * (this.height - this.topPadding) / (this.yMax - this.yMin));
 }
 graphObject.prototype.mapXValToGraph = function(xVal){
+	xVal -= this.xMin;
 	return this.x + (xVal * (this.width) / (this.xMax - this.xMin));
 }
 
@@ -63,12 +65,12 @@ graphObject.prototype.setAxes = function(){
 	this.yAxisData = new Array(this.yLen);
 	this.y_val_step = (this.yMax - this.yMin) / (this.yLen - 1);
 	for(var i = 0; i < this.yLen; i++){
-		this.yAxisData[i] = {"value": ((i*this.y_val_step + this.yMin).toFixed(2)), "loc": this.mapYValToGraph(i*this.y_val_step)} ;
+		this.yAxisData[i] = {"value": ((i*this.y_val_step + this.yMin).toFixed(2)), "loc": this.mapYValToGraph(i*this.y_val_step + this.yMin)} ;
 	}
 	this.xAxisData = new Array(this.xLen);
 	this.x_val_step = (this.xMax - this.xMin) / (this.xLen - 1);
 	for(var i = 0; i < this.xLen; i++){
-		this.xAxisData[i] = {"value": ((i*this.x_val_step + this.xMin).toFixed(2)), "x": this.mapXValToGraph(i*this.x_val_step), "y": this.y} ;
+		this.xAxisData[i] = {"value": ((i*this.x_val_step + this.xMin).toFixed(2)), "x": this.mapXValToGraph(i*this.x_val_step + this.xMin), "y": this.y} ;
 	}
 	return this;
 }
@@ -100,8 +102,6 @@ graphObject.prototype.setYAttr = function (){
 	//add 1 to the length so that the final value isn't on the very edge of the graph
 	var count = 0;
 	//calculating the maximum value in the new set
-	this.yMax = 1.5;
-	this.yMin = -1.5;
 	var queueIndex = 0;
 
 	this.setAxes();
@@ -120,7 +120,7 @@ graphObject.prototype.setYAttr = function (){
 			"name": this.data[i].name,
 			//index and sortedOrder are used to sort the xData without altering the original order of the data.  Transitions would not be possible
 			//without this
-			"y": this.mapYValToGraph(this.data[i].y -this.yMin),
+			"y": this.mapYValToGraph(this.data[i].y),
 			"x": this.mapXValToGraph(this.data[i].x),
 			"cssClass": cssClass,
 			//These fields store the addresses of the svg elements that represent this data.  Storing them is necessary so that each
@@ -174,36 +174,33 @@ graphObject.prototype.destroyAll = function(){
 	this.destroyElement(this.xColorLegend);
 	d3.selectAll("#QLegend").remove();
 
-}
+};
 
+graphObject.prototype.destroyPoints = function(){
+	this.destroyElement(this.points);
+};
 //Destroys an element
 graphObject.prototype.destroyElement = function(svgElement){
 	if(svgElement != null) svgElement.remove();
-}
+};
 
 
 
 graphObject.prototype.draw = function(){
 	
-	this.mouseOver = elementMouseOverClosure();
+	this.mouseOver = elementMouseOverClosure(this.x, this.y);
 	this.mouseOut = elementMouseOutClosure();
 //	this.pathMouseOver = pathMouseOverClosure();
 //	this.pathMouseOut = pathMouseOutClosure();
 	//Drawing items first whose behavior is dependent on whether time view is active or not
 //	this.drawPopups();
 	this.drawPoints();
-	
 
 	//BarGraph xTicks are drawn even in time view because they will shift down to act as a legend for the new line graph
 	//These draw functions are independent of whether it is time view or bar view
 	this.drawAxesLabels();
 	this.drawAxesLegends();
 	this.drawAxes();
-
-
-
-
-
 }
 
 
@@ -261,7 +258,7 @@ graphObject.prototype.drawAxesLabels = function(){
 		.attr("text-anchor", "middle")
 		.attr({
 			x: this.x  + this.width / 2,
-			y: svgHeight - 10 
+			y: this.y - 10 
 		})
 		.text(this.titleX);		
 	
@@ -407,20 +404,20 @@ graphObject.prototype.drawAxesLegends = function() {
 //Closure needed to have multiple svg-elements activate (highlight) when any one of them is highlighted
 //Ex. Mousing over the label, line plot, or color legend for any single computer / user will cause the label to increase its font
 //and the line to turn black and increase its stroke width.
-function elementMouseOverClosure(){
+function elementMouseOverClosure(graphX, graphY){
 	var elementMouseOver = function(d, i){
 		d.svgXTrace = d3.select("#mainCanvas").append("line").attr({
 			x1: d.x,
 			y1: d.y,
 			x2: d.x,
-			y2: MAIN_GRAPH.y,
+			y2: graphY,
 			class: d.cssClass
 		})
 		.style("opacity", 0);
 		d.svgYTrace = d3.select("#mainCanvas").append("line").attr({
 			x1: d.x,
 			y1: d.y,
-			x2: MAIN_GRAPH.x,
+			x2: graphX,
 			y2: d.y,
 			class: d.cssClass
 		})
@@ -432,7 +429,6 @@ function elementMouseOverClosure(){
 		d.svgXTrace.transition().style("opacity",1);
 		d.svgYTrace.transition().style("opacity",1);
 		var sideBarTop = d3.select("#sideBar1").attr("class", d.cssClass +"Box sideBox");
-		console.log(d);
 		document.getElementById("sideBar1").innerHTML = "<h3>" + d.name + "</h3><h2>Years in Office</h2><h3>" + d.id + "</h3>" + "<h3>IMAGE GOES HERE</h3>";
 		document.getElementById("sideBar2").innerHTML = "<h2>Personal information</h2><h2>Wikipedia Link</h2><p>???Vote History???</p><p>???Speech History???</p>";
 	}

@@ -1,67 +1,101 @@
-var svgWidth = 900;
-var svgHeight = 700;
-var xPadding = 150;
-var yPadding = 150;
-var chartWidth = svgWidth - xPadding; 
-var chartHeight = svgHeight - yPadding; 
-var MAIN_GRAPH = null;
-d3.select("#sideBar1").style("height", (svgHeight/2) + "px");
-var svg = d3.select("#selfChart").append("svg")
-	.style("height", svgHeight)
-	.style("width", "100%")
-	.attr("id", "mainCanvas")
-	.attr("viewBox", "0 0 " + svgWidth + " " + svgHeight)
-	.attr("preserveAspectRatio", "xMidYMid");
-
-function configureData(data){
-	var graphData = new Array(data.length);
-	for(var i = 0; i < data.length; i++){
-		graphData[i] = {
-			datum: data[i],
-			name: data[i].memberName,
-			id: data[i].party,
-			x: Math.random(), 
-			y: data[i].speechPos,
-			r: Math.random(), 
-			shape: "circle",
-		};
-	}
-	return graphData;
-}
-
 function main(){
 	"use strict";
-	d3.csv("data/EstimatesSenate113.csv", function(d){
-		return {
-			memberName: d.membername,
-			speaker: d.speaker,
-			lastName: d.lastname,
-			state: d.state,
-			party: d.party,
-			memberID: +d.memberID,
-			speechPos: +d.thetaest,
-			thetaCilb: +d.thetacilb,
-			thetaCiub: +d.thetaciub	
+	var mainWidth = 900;
+	var mainHeight = 700;
+	var topBarHeight = 80;
+	var xPadding = 150;
+	var yPadding = 150;
+	var chartWidth = mainWidth - xPadding; 
+	var chartHeight = mainHeight - yPadding; 
+	var MAIN_GRAPH = null;
+	var yearButtons = new Array(10);
+	
+	//dynamically resizing the side bar.
+	d3.select("#sideBar1").style("height", (mainHeight/2) + "px");
+	
+	//This is our primary SVG that will hold the graph
+	var mainSvg = d3.select("#selfChart").append("svg")
+		.style("height", mainHeight)
+		.style("width", "100%")
+		.attr("id", "mainCanvas")
+		.attr("viewBox", "0 0 " + mainWidth + " " + mainHeight)
+		.attr("preserveAspectRatio", "xMidYMid");
+
+	//top bar contains buttons for loading different years of data and will contain later features
+	var topBar = d3.select("#topButtonsBar").append("svg")
+		.style("height", topBarHeight)
+		.style("width", "100%")
+		.attr("id", "topBar")
+		.attr("viewBox", "0 0 " + mainWidth + " " + topBarHeight)
+		.attr("preserveAspectRatio", "xMidYMid");
+
+	//Creates the year filter buttons for the top bar
+	//Configure the senator data into a format that can be properly bounded to and represented by the graph
+	function configureData(data){
+		var graphData = new Array(data.length);
+		for(var i = 0; i < data.length; i++){
+			graphData[i] = {
+				//store all of the imported datum for display purposes
+				datum: data[i],
+				//store data directly relevant to the graph in the first level
+				name: data[i].name,
+				id: data[i].party,
+				//temporary random() while votePos is being calculated for all years
+				x: data[i].votePos ? data[i].votePos : Math.random()*6 - 3, 
+				y: data[i].speechPos,
+				r: 5, 
+				shape: "circle",
 			};
-		},
-		function(error, senateData){
-			if(error)
-				console.error(error);
+		}
+		return graphData;
+	}
 
-			var graphData = configureData(senateData);
-			MAIN_GRAPH = new graphObject(xPadding * 2 / 3, svgHeight-(yPadding / 2) - 30, svgWidth - xPadding, svgHeight-yPadding, svg);
-			MAIN_GRAPH.setTitleY("Speech Position");
-			MAIN_GRAPH.setTitleX("Vote Position");
-			MAIN_GRAPH.setData(graphData);
+	function readDataCSV(year){
+		"use strict";
+		var fileName = !year ? "data/Wordshoal_and_RC_positions.csv" : "data/EstimatesSenate1"+year+".csv";
+		d3.csv(fileName, function(d){
+			return {
+				//NOTE: The original CSV file headers contain periods in them (e.g., theta.est).
+				name: d.name,
+				speaker: d.speaker,
+				state: d.state,
+				party: d.party,
+				votePos: +d["ideal.est"],
+				speechPos: +d["theta.est"],
+			//	thetaCilb: +d.thetacilb,
+			//	thetaCiub: +d.thetaciub	
+				};
+			},
+			function(error, senateData){
 
-	
-		});
+				if(error) console.error(error);
+
+				var graphData = configureData(senateData);
+				//generate the graph if this is the first call.  Else, just redraw the points
+				if(!MAIN_GRAPH)
+					MAIN_GRAPH = new graphObject(xPadding * 2 / 3, mainHeight-(yPadding / 2) - 30, mainWidth - xPadding, mainHeight-yPadding, mainSvg);
+				else
+					MAIN_GRAPH.destroyPoints();	
+				MAIN_GRAPH.setTitleY("Speech Position");
+				MAIN_GRAPH.setTitleX("Vote Position");
+				MAIN_GRAPH.setData(graphData);	
+			});
+	}
+	function createYearButtons(){
+		var yearButtonData = new Array(10);
+		var i = 0;
+		for(var year = 4; year< 14; i++, year++){
+			yearButtonData[i] = {"year": "2" + pad(year, 3), "val": ""+pad(year,2)};
+			yearButtons[i] = new buttonWidget(0 + 60*i, 10, 40, 40, yearButtonData[i]["year"], readYearCSV(yearButtonData[i]["val"]), topBar, 18, "butYear", "derp");
+		}
+	}
+	function readYearCSV(year){
+		var readYearCSVClosure = function(){
+			readDataCSV(year);
+		}
+		return readYearCSVClosure;
+	}
+	createYearButtons();
+	readDataCSV();
 }
-	
-
-d3.selection.prototype.moveToFront = function() {
-	return this.each(function(){
-		this.parentNode.appendChild(this);
-	});
-};
 main();
