@@ -73,12 +73,13 @@ function main(){
 
 				var graphData = configureData(senateData);
 				//generate the graph if this is the first call.  Else, just redraw the points
-				if(!MAIN_GRAPH)
+				if(!MAIN_GRAPH){
 					MAIN_GRAPH = new graphObject(xPadding * 2 / 3, mainHeight-(yPadding / 2) - 30, mainWidth - xPadding, mainHeight-yPadding, mainSvg);
+					MAIN_GRAPH.setTitleY("Speech Position");
+					MAIN_GRAPH.setTitleX("Vote Position");
+				}
 				else
-					MAIN_GRAPH.destroyPoints();	
-				MAIN_GRAPH.setTitleY("Speech Position");
-				MAIN_GRAPH.setTitleX("Vote Position");
+					MAIN_GRAPH.destroyAll();	
 				MAIN_GRAPH.setData(graphData);	
 			});
 	}

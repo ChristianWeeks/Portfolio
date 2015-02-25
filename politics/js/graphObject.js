@@ -154,26 +154,24 @@ graphObject.prototype.setData = function(dataObject){
 
 //Removes all svg elements from the graph
 graphObject.prototype.destroyAll = function(){
-	if(this.points != null){
+/*	if(this.points != null){
 		this.points.transition().duration(10000)
 			.attr("opacity", 1)
 			.attr("yTop", this.y)
 			.each("end", this.destroyElement(this.points));
-	}
-	//this.destroyElement(this.points);
+	}*/
+	this.destroyElement(this.points);
 	this.destroyElement(this.yTickMarks);
 	this.destroyElement(this.yGridLines);
 	this.destroyElement(this.yTickLabels);
 	this.destroyElement(this.xTickMarks);
 	this.destroyElement(this.xTickLabels);
-	this.destroyElement(this.popups);
 	this.destroyElement(this.title);
 	this.destroyElement(this.yAxisLabel);
 	this.destroyElement(this.xAxisLabel);
-	this.destroyElement(this.linePlot);
-	this.destroyElement(this.xTickTimeLabels);
-	this.destroyElement(this.xColorLegend);
-	d3.selectAll("#QLegend").remove();
+	this.destroyElement(this.axesLegends);
+	this.destroyElement(this.x_axis);
+	this.destroyElement(this.y_axis);
 
 };
 
@@ -257,9 +255,10 @@ graphObject.prototype.drawAxesLabels = function(){
 	this.xAxisLabel = this.svgPointer.append("text")
 		.attr("class", "axisTitle")
 		.attr("text-anchor", "middle")
+		.attr("alignment-baseline", "middle")
 		.attr({
 			x: this.x  + this.width / 2,
-			y: this.y - 10 
+			y: this.y  + 60 
 		})
 		.text(this.titleX);		
 	
