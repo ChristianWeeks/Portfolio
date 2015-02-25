@@ -49,15 +49,31 @@ function main(){
 				shape: "circle",
 			};
 		}
+		//sort array to get vote ranking / percentage
+		graphData.sort(function(a, b){return a.x > b.x});
+		for(var i = 0; i < graphData.length; i++){
+			console.log(graphData[i].name);
+			graphData[i].votePercent = i / graphData.length;
+		}
+		console.log("BLAA:HFOWEIAHFW:F");
+		//sort for speech ranking / percentage
+		graphData.sort(function(a, b){return a.y > b.y});
+		for(var i = 0; i < graphData.length; i++){
+			console.log(graphData[i].name);
+	//		console.log(graphData[i].y);
+			graphData[i].speechPercent = i / graphData.length;
+			graphData[i].speechVoteDelta = Math.abs(graphData[i].x - graphData[i].y);
+		}
 		return graphData;
 	}
 
+	//read in the data from a single year.  Even though this is in the "main()" namespace, it is effectively our MAIN function
 	function readDataCSV(year){
 		var fileName = !year ? "data/Wordshoal_and_RC_positions.csv" : "data/EstimatesSenate1"+year+".csv";
 		d3.csv(fileName, function(d){
 			return {
 				//NOTE: The original CSV file headers contain periods in them (e.g., theta.est).
-				name: d.name,
+				name: d.name ? d.name : d["member.name"],
 				speaker: d.speaker,
 				state: d.state,
 				party: d.party,
@@ -78,11 +94,14 @@ function main(){
 					MAIN_GRAPH.setTitleY("Speech Position");
 					MAIN_GRAPH.setTitleX("Vote Position");
 				}
+				//remove all of the previous svgs when loading a new year
 				else
 					MAIN_GRAPH.destroyAll();	
 				MAIN_GRAPH.setData(graphData);	
 			});
 	}
+
+	//draws the timeline at the top.
 	function createYearButtons(){
 		var yearButtonData = new Array(10);
 		var i = 0;
@@ -91,6 +110,8 @@ function main(){
 		}
 		timeline(yearButtonData, 0, 60, topBar, readYearCSV());
 	}
+	
+	//closure that returns an individual function for each button on the timeline, so that year's click feature loads the proper data
 	function readYearCSV(){
 		var readYearCSVClosure = function(d, i){
 			readDataCSV(d.val);

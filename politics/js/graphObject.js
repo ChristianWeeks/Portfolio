@@ -119,8 +119,8 @@ graphObject.prototype.setYAttr = function (){
 			"data": this.data[i],
 			"id": this.data[i].id,
 			"name": this.data[i].name,
-			//index and sortedOrder are used to sort the xData without altering the original order of the data.  Transitions would not be possible
-			//without this
+			"xVal": this.data[i].x,
+			"yVal": this.data[i].y,
 			"y": this.mapYValToGraph(this.data[i].y),
 			"x": this.mapXValToGraph(this.data[i].x),
 			"cssClass": cssClass,
@@ -406,6 +406,7 @@ graphObject.prototype.drawAxesLegends = function() {
 //and the line to turn black and increase its stroke width.
 function elementMouseOverClosure(graphX, graphY){
 	var elementMouseOver = function(d, i){
+		//draw lines extending to x and y axes
 		d.svgXTrace = d3.select("#mainCanvas").append("line").attr({
 			x1: d.x,
 			y1: d.y,
@@ -422,15 +423,21 @@ function elementMouseOverClosure(graphX, graphY){
 			class: d.cssClass
 		})
 		.style("opacity", 0);
+
+		//highlight the nodes
 		d3.select(d.svgPopup).moveToFront();
 		d3.select(d.svgPoint).moveToFront();
 		d3.select(d.svgPopup).transition().style("opacity", 1);
 		d3.select(d.svgPoint).transition().attr("r", 15);
 		d.svgXTrace.transition().style("opacity",1);
 		d.svgYTrace.transition().style("opacity",1);
+
+		//fill in the information bar at the side
 		var sideBarTop = d3.select("#sideBar1").attr("class", d.cssClass +"Box sideBox");
 		document.getElementById("sideBar1").innerHTML = "<h3>" + d.name + "</h3><h2>Years in Office</h2><h3>" + d.id + "</h3>" + "<h3>IMAGE GOES HERE</h3>";
-		document.getElementById("sideBar2").innerHTML = "<h2>Personal information</h2><h2>Wikipedia Link</h2><p>???Vote History???</p><p>???Speech History???</p>";
+		document.getElementById("sideBar2").innerHTML = "<h3>Vote: " + d.xVal.toFixed(2) + " %: " + Math.floor(100*d.data.votePercent) + "%</h3>" +
+		   "<h3>Speech: " + d.yVal.toFixed(2) + " %: " + Math.floor(100*d.data.speechPercent) + "%</h3>"	
+			+"<h2>Personal information</h2><h2>Wikipedia Link</h2><p>???Vote History???</p><p>???Speech History???</p>";
 	}
 	return elementMouseOver;
 }
