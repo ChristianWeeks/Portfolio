@@ -1,5 +1,7 @@
+"use strict";
 //The graph object draws the graph and interpolates its axis boundaries based on the data it is fed
-graphObject = function(x, y, width, newHeight, svg){
+
+var graphObject = function(x, y, width, newHeight, svg){
 	//standard graph values
 	this.x = x;
 	this.y = y;
@@ -15,7 +17,6 @@ graphObject = function(x, y, width, newHeight, svg){
 	this.yMin = -2;
 	this.xMax = 3; 
 	this.xMin = -3;
-
 	this.topPadding = 30 
 	this.currentlyViewedData = null;
 	this.timeView = false;
@@ -106,7 +107,7 @@ graphObject.prototype.setYAttr = function (){
 
 	this.setAxes();
 	this.firstTimeData = null;
-	for (i in this.data){
+	for (var i in this.data){
 		var cssClass;
 		if(this.data[i].id == "R")
 			cssClass = "rep";

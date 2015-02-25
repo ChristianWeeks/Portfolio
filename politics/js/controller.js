@@ -1,5 +1,6 @@
+"use strict";
+
 function main(){
-	"use strict";
 	var mainWidth = 900;
 	var mainHeight = 700;
 	var topBarHeight = 80;
@@ -17,6 +18,7 @@ function main(){
 	var mainSvg = d3.select("#selfChart").append("svg")
 		.style("height", mainHeight)
 		.style("width", "100%")
+		.style("height", "100%")
 		.attr("id", "mainCanvas")
 		.attr("viewBox", "0 0 " + mainWidth + " " + mainHeight)
 		.attr("preserveAspectRatio", "xMidYMid");
@@ -51,7 +53,6 @@ function main(){
 	}
 
 	function readDataCSV(year){
-		"use strict";
 		var fileName = !year ? "data/Wordshoal_and_RC_positions.csv" : "data/EstimatesSenate1"+year+".csv";
 		d3.csv(fileName, function(d){
 			return {
@@ -85,13 +86,13 @@ function main(){
 		var yearButtonData = new Array(10);
 		var i = 0;
 		for(var year = 4; year< 14; i++, year++){
-			yearButtonData[i] = {"year": "2" + pad(year, 3), "val": ""+pad(year,2)};
-			yearButtons[i] = new buttonWidget(0 + 60*i, 10, 40, 40, yearButtonData[i]["year"], readYearCSV(yearButtonData[i]["val"]), topBar, 18, "butYear", "derp");
+			yearButtonData[i] = {"year": "2" + pad(year, 3), "val": ""+pad(year,2), "id": i};
 		}
+		timeline(yearButtonData, 0, 60, topBar, readYearCSV());
 	}
-	function readYearCSV(year){
-		var readYearCSVClosure = function(){
-			readDataCSV(year);
+	function readYearCSV(){
+		var readYearCSVClosure = function(d, i){
+			readDataCSV(d.val);
 		}
 		return readYearCSVClosure;
 	}

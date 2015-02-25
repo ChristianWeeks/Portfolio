@@ -1,8 +1,7 @@
+"use strict";
 //Generic class for the many buttons in the visualization.  They all differ by their functionality, which is
 //determined by clickObj, the method that is executed when the user clicks on the button
-buttonWidget = function(x, y, boxWidth, boxHeight, label, clickObj, svgObject, fontSize, id, name){
-	"use strict";
-	
+var buttonWidget = function(x, y, boxWidth, boxHeight, label, clickObj, svgObject, fontSize, id, name){	
 	var labelPadding = 5
 	
 	//button label
