@@ -85,17 +85,6 @@ graphObject.prototype.setTitleX = function(titleStr){
 	this.titleX = titleStr;
 	return this;
 }
-
-graphObject.prototype.setXAttr = function(xAttr){
-	this.xAttr = xAttr;
-	return this;
-}
-
-graphObject.prototype.setTimeView = function(flag){
-	this.timeView = flag;
-	return this;
-}
-
 //changes the value that is currently displayed (total tasks, seconds / task, delay / task, etc.) by modifying
 //the data object that will ALWAYS be graphed
 graphObject.prototype.setYAttr = function (){
