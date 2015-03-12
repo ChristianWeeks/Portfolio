@@ -1,5 +1,7 @@
 "use strict";
 
+
+
 function main(){
 	var mainWidth = 900;
 	var mainHeight = 700;
@@ -35,16 +37,60 @@ function main(){
 	//Configure the senator data into a format that can be properly bounded to and represented by the graph
 	function configureData(data){
 		var graphData = new Array(data.length);
+		var voteMin, voteMax, speechMin, speechMax;
+		var voteMagnitude, speechMagnitude;
+		var isRandom = 0;
+		voteMin = voteMax = speechMin = speechMax = 0;
+		console.log(speechMin);
+		console.log(speechMax);
+		
+		//First we find the magnitude to normalize all the values between 0 and 1.
 		for(var i = 0; i < data.length; i++){
+		//console.log(speechMin);
+			if(data[i].speechPos > speechMax)
+		//		console.log(data[i].speechPos);
+				speechMax = data[i].speechPos;
+			if(data[i].speechPos < speechMin)
+				speechMin = data[i].speechPos;
+			//----------------------------------------------------------------------------------------------------------------------
+			//temporary random() while votePos is being calculated for all years
+			if(!data[i].votePos){
+				data[i].votePos = Math.random();
+				isRandom = 1;
+			}	
+			else{
+			//----------------------------------------------------------------------------------------------------------------------
+				if(data[i].votePos > voteMax)
+					voteMax = data[i].votePos;	
+				if(data[i].votePos < voteMin)
+					voteMin = data[i].votePos;	
+			}
+		}
+
+		speechMagnitude = speechMax - speechMin;
+		console.log(speechMagnitude);
+		if(isRandom)
+			voteMagnitude = 1;
+		else
+			voteMagnitude = voteMax - voteMin;
+				
+
+
+		for(var i = 0; i < data.length; i++){
+			normalVote = (data[i].votePos-voteMin) / voteMagnitude, 
+			normalSpeech = (data[i].speechPos-speechMin) / speechMagnitude,
 			graphData[i] = {
 				//store all of the imported datum for display purposes
 				datum: data[i],
 				//store data directly relevant to the graph in the first level
 				name: data[i].name,
 				id: data[i].party,
+				//----------------------------------------------------------------------------------------------------------------------
 				//temporary random() while votePos is being calculated for all years
-				x: data[i].votePos ? data[i].votePos : Math.random()*6 - 3, 
-				y: data[i].speechPos,
+				x: normalVote, 
+				//----------------------------------------------------------------------------------------------------------------------
+				y: normalSpeech,
+				delta: normalSpeech - normalVote,
 				r: 5, 
 				shape: "circle",
 			};
@@ -52,15 +98,11 @@ function main(){
 		//sort array to get vote ranking / percentage
 		graphData.sort(function(a, b){return a.x > b.x});
 		for(var i = 0; i < graphData.length; i++){
-			console.log(graphData[i].name);
 			graphData[i].votePercent = i / graphData.length;
 		}
-		console.log("BLAA:HFOWEIAHFW:F");
 		//sort for speech ranking / percentage
 		graphData.sort(function(a, b){return a.y > b.y});
 		for(var i = 0; i < graphData.length; i++){
-			console.log(graphData[i].name);
-	//		console.log(graphData[i].y);
 			graphData[i].speechPercent = i / graphData.length;
 			graphData[i].speechVoteDelta = Math.abs(graphData[i].x - graphData[i].y);
 		}

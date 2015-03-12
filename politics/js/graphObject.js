@@ -13,10 +13,10 @@ var graphObject = function(x, y, width, newHeight, svg){
 	//yLen is the number of steps on the y axis, including 0
 	this.yLen = 7;
 	this.xLen = 5;
-	this.yMax = 2;
-	this.yMin = -2;
-	this.xMax = 3; 
-	this.xMin = -3;
+	this.yMax = 1;
+	this.yMin = 0;
+	this.xMax = 1; 
+	this.xMin = 0;
 	this.topPadding = 30 
 	this.currentlyViewedData = null;
 	this.timeView = false;
