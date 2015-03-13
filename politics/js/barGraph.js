@@ -452,7 +452,7 @@ function elementMouseOverClosure(graphX, graphY){
 		var sideBarTop = d3.select("#sideBar1").attr("class", d.cssClass +"Box sideBox");
 		document.getElementById("sideBar1").innerHTML = "<h3>" + d.name + "</h3><h2>Years in Office</h2><h3>" + d.id + "</h3>" + "<h3>IMAGE GOES HERE</h3>";
 		document.getElementById("sideBar2").innerHTML = "<h3>Vote: " + d.xVal.toFixed(2) + " %: " + Math.floor(100*d.data.votePercent) + "%</h3>" +
-		   "<h3>Speech: " + d.yVal.toFixed(2) + " %: " + Math.floor(100*d.data.speechPercent) + "%</h3>"	
+		   "<h3>Speech: " + d.yVal.toFixed(2) + " %: " + Math.floor(100*d.data.speechPercent) + "%</h3>" +"<h3>Delta: " + d.data.delta.toFixed(3) + "</h3>" + 
 			+"<h2>Personal information</h2><h2>Wikipedia Link</h2><p>???Vote History???</p><p>???Speech History???</p>";
 	}
 	return elementMouseOver;

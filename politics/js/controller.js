@@ -95,17 +95,17 @@ function main(){
 			};
 		}
 		//sort array to get vote ranking / percentage
-		graphData.sort(function(a, b){return a.x > b.x});
+		graphData.sort(function(a, b){return a.x - b.x});
 		for(var i = 0; i < graphData.length; i++){
 			graphData[i].votePercent = i / graphData.length;
 		}
 		//sort for speech ranking / percentage
-		graphData.sort(function(a, b){return a.y > b.y});
+		graphData.sort(function(a, b){return a.y - b.y});
 		for(var i = 0; i < graphData.length; i++){
 			graphData[i].speechPercent = i / graphData.length;
 			graphData[i].speechVoteDelta = Math.abs(graphData[i].x - graphData[i].y);
 		}
-		graphData.sort(function(a, b){return a.delta > b.delta});
+		graphData.sort(function(a, b){return a.delta - b.delta});
 		return graphData;
 	}
 
