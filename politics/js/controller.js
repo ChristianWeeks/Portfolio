@@ -3,7 +3,7 @@
 
 
 function main(){
-	var mainWidth = 900;
+	var mainWidth = 1200;
 	var mainHeight = 700;
 	var topBarHeight = 80;
 	var xPadding = 150;
@@ -68,13 +68,12 @@ function main(){
 		}
 
 		speechMagnitude = speechMax - speechMin;
-		console.log(speechMagnitude);
 		if(isRandom)
 			voteMagnitude = 1;
 		else
 			voteMagnitude = voteMax - voteMin;
 				
-
+		var normalVote, normalSpeech;
 
 		for(var i = 0; i < data.length; i++){
 			normalVote = (data[i].votePos-voteMin) / voteMagnitude, 
@@ -106,6 +105,7 @@ function main(){
 			graphData[i].speechPercent = i / graphData.length;
 			graphData[i].speechVoteDelta = Math.abs(graphData[i].x - graphData[i].y);
 		}
+		graphData.sort(function(a, b){return a.delta > b.delta});
 		return graphData;
 	}
 
