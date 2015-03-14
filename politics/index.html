@@ -6,10 +6,11 @@
 		<script src="js/dependencies/jquery-1.11.2.min.js"></script>
 		<script src="js/dependencies/bootstrap.min.js"></script>
 		<script src="js/dependencies/plugins.js"></script>
-		<script src="js/buttonWidget.js"></script>
+		<script src="js/util.js"></script>
+		<script src="js/graphObject.js"></script>
+		<script src="js/scatterPlot.js"></script>
 		<script src="js/barGraph.js"></script>
 		<script src="js/timeline.js"></script>
-		<script src="js/util.js"></script>
 		<title>Speech Visualization - Draft</title>
 		<link rel="stylesheet" href="css/main.css">
 		<link rel="stylesheet" href="css/bootstrap.min.css">
@@ -26,7 +27,9 @@
 
 			<div class="row">
 				<div class="col-md-9">
-					<div align="left" id="selfChart">
+					<div align="left" id="scatterCanvas">
+					</div>
+					<div align="left" id="barCanvas">
 					</div>
 				</div>
 				<div class="col-md-3" id="sideBar">

@@ -19,35 +19,14 @@ var graphObject = function(x, y, width, newHeight, svg){
 	this.xMin = 0;
 	this.topPadding = 30 
 	this.currentlyViewedData = null;
-	this.timeView = false;
-	this.daysInMonth = 0;
 
-	//scales used to color code the bars.
-	//default scale used for unordered / categorical colors	
-	this.defaultColorScale = d3.scale.category20b();
-	//queue scale colors bars / lines by their queue.  Only works if computers are the current X attribute
-	this.queueColorScale = d3.scale.category10();
-
-	//Contains the names of all the queues
-	this.allQueues = [];
-	
 	this.yAttr = false;
-	this.xAttr = false;
 
 	//pointer to all data that is currently being graphed
 	this.data = null;
 
 	//initializing all svg containers
-	this.points = null;
-	this.yTickMarks = null;
-	this.yGridLines = null;
-	this.yTickLabels = null;
-	this.xTickMarks = null;
-	this.xTickLabels = null;
-	this.popups = null;
-	this.title = null;
-	this.linePlot = null;
-	this.linePlotCircles = null;
+	this.svgElements = {};
 }
 
 //maps from canvas space to graph space
@@ -85,47 +64,6 @@ graphObject.prototype.setTitleX = function(titleStr){
 	this.titleX = titleStr;
 	return this;
 }
-//changes the value that is currently displayed (total tasks, seconds / task, delay / task, etc.) by modifying
-//the data object that will ALWAYS be graphed
-graphObject.prototype.setYAttr = function (){
-	this.destroyAll();
-	//add 1 to the length so that the final value isn't on the very edge of the graph
-	var count = 0;
-	//calculating the maximum value in the new set
-	var queueIndex = 0;
-
-	this.setAxes();
-	this.firstTimeData = null;
-	for (var i in this.data){
-		var cssClass;
-		if(this.data[i].id == "R")
-			cssClass = "rep";
-		else if(this.data[i].id == "D")
-			cssClass = "dem";
-		else
-			cssClass = "ind";
-		this.currentlyViewedData[i] = {
-			"data": this.data[i],
-			"id": this.data[i].id,
-			"name": this.data[i].name,
-			"xVal": this.data[i].x,
-			"yVal": this.data[i].y,
-			"y": this.mapYValToGraph(this.data[i].y),
-			"x": this.mapXValToGraph(this.data[i].x),
-			"cssClass": cssClass,
-			//These fields store the addresses of the svg elements that represent this data.  Storing them is necessary so that each
-			//mousing over one element will highlight both of them.
-			"svgLabel": null,
-			"svgPopup": null,
-		};
-		//	console.log(this.mapYValToGraph(this.data[i].y));
-		//	console.log(this.mapXValToGraph(this.data[i].x));
-		//setting the timeView setting to true so that the line point positions will be calculated relative to yMaxTime instead of the default yMax 
-	}
-	this.draw()
-		//setTimeout(this.draw(), 5000);
-
-}
 	
 //assigns the data that will be currently displayed
 graphObject.prototype.setData = function(dataObject){
@@ -143,85 +81,22 @@ graphObject.prototype.setData = function(dataObject){
 
 //Removes all svg elements from the graph
 graphObject.prototype.destroyAll = function(){
-/*	if(this.points != null){
-		this.points.transition().duration(10000)
-			.attr("opacity", 1)
-			.attr("yTop", this.y)
-			.each("end", this.destroyElement(this.points));
-	}*/
-	this.destroyElement(this.points);
-	this.destroyElement(this.yTickMarks);
-	this.destroyElement(this.yGridLines);
-	this.destroyElement(this.yTickLabels);
-	this.destroyElement(this.xTickMarks);
-	this.destroyElement(this.xTickLabels);
-	this.destroyElement(this.title);
-	this.destroyElement(this.yAxisLabel);
-	this.destroyElement(this.xAxisLabel);
-	this.destroyElement(this.axesLegends);
-	this.destroyElement(this.x_axis);
-	this.destroyElement(this.y_axis);
+	for(var key in this.svgElements)
+		this.destroyElement(this.svgElements[key]);
 
-};
-
-graphObject.prototype.destroyPoints = function(){
-	this.destroyElement(this.points);
 };
 //Destroys an element
 graphObject.prototype.destroyElement = function(svgElement){
 	if(svgElement != null) svgElement.remove();
 };
 
-
-
-graphObject.prototype.draw = function(){
-	
-	this.mouseOver = elementMouseOverClosure(this.x, this.y);
-	this.mouseOut = elementMouseOutClosure();
-//	this.pathMouseOver = pathMouseOverClosure();
-//	this.pathMouseOut = pathMouseOutClosure();
-	//Drawing items first whose behavior is dependent on whether time view is active or not
-//	this.drawPopups();
-	this.drawPoints();
-
-	//BarGraph xTicks are drawn even in time view because they will shift down to act as a legend for the new line graph
-	//These draw functions are independent of whether it is time view or bar view
-	this.drawAxesLabels();
-	this.drawAxesLegends();
-	this.drawAxes();
-}
-
-
 //------------------------------------------------------------------------------------------------------
 //DRAW METHODS - Everything below handles the brunt of the D3 code and draws everything to the canvas
 //------------------------------------------------------------------------------------------------------
 
-//Creates the points 
-graphObject.prototype.drawPoints= function(){
-	 this.points = this.svgPointer.selectAll("Points")
-		.data(this.currentlyViewedData)
-		.enter()
-		.append("circle")	
-		.attr("class", function(d){return d.cssClass;})
-		.attr("id", function(d){ return d.id;})
-
-	//	.style("fill", function(d) {return d.color})
-	//	.style("stroke", function(d) {return d.color})
-	//	.style("stroke-width", 0)
-		.attr({
-			cx: function(d) { d.svgPoint = this;
-				return d.x;},
-			cy: function(d) {return d.y;},
-			r: 7,//function(d) {return d.r;},
-		})
-		.on("mouseover", this.mouseOver)
-		.on("mouseout", this.mouseOut);
-}
-
 //Creates the labels for the axes and the main title
-graphObject.prototype.drawAxesLabels = function(){
-	//main title
-	this.title = this.svgPointer.append("text")
+graphObject.prototype.drawTitle = function(){
+	this.svgElements["title"] = this.svgPointer.append("text")
 		.attr("class", "axisTitle")
 		.style("font-size", 40)
 		.attr("text-anchor", "middle")
@@ -230,8 +105,11 @@ graphObject.prototype.drawAxesLabels = function(){
 			y: this.y - this.height
 		})
 		.text(this.titleY + " by " + this.titleX);
-	//label for the y axis
-	this.yAxisLabel = this.svgPointer.append("text")
+}
+
+//label for the y axis
+graphObject.prototype.drawYAxisLabel = function(){
+	this.svgElements["yAxisLabel"] = this.svgPointer.append("text")
 		.attr("class", "axisTitle")
 		.attr("text-anchor", "middle")
 		.attr({
@@ -240,8 +118,11 @@ graphObject.prototype.drawAxesLabels = function(){
 		})
 		.attr("transform", "rotate(-90 " + (this.x/3) + ", " + (this.y - this.height / 2) + ")")
 		.text(this.titleY);
-	//label for the x axis
-	this.xAxisLabel = this.svgPointer.append("text")
+}
+
+//label for the x axis
+graphObject.prototype.drawXAxisLabel = function(){
+	this.svgElements["xAxisLabel"] = this.svgPointer.append("text")
 		.attr("class", "axisTitle")
 		.attr("text-anchor", "middle")
 		.attr("alignment-baseline", "middle")
@@ -249,13 +130,12 @@ graphObject.prototype.drawAxesLabels = function(){
 			x: this.x  + this.width / 2,
 			y: this.y  + 60 
 		})
-		.text(this.titleX);		
-	
+		.text(this.titleX);	
 }
 
 //creates the black lines that make the x and y axes
-graphObject.prototype.drawAxes = function() {
-	 this.x_axis = this.svgPointer.append("line")
+graphObject.prototype.drawXAxis = function() {
+	 this.svgElements["x_axis"] = this.svgPointer.append("line")
 		.attr({
 			x1: this.x,
 			y1: this.y,
@@ -265,7 +145,7 @@ graphObject.prototype.drawAxes = function() {
 		});
 	//Creates the tick marks for the x-axis based on the total number of x values.  Does not create vertical grid lines.
 	//Drawing the tick marks and labels for the x axis
-	 this.xTickMarks = this.svgPointer.selectAll("xTickMarksBar")
+	 this.svgElements["xTickMarks"] = this.svgPointer.selectAll("xTickMarksBar")
 		.data(this.xAxisData)
 		.enter()
 		.append("line")
@@ -277,7 +157,7 @@ graphObject.prototype.drawAxes = function() {
 			stroke: '#000'
 		});
 
-	 this.xTickLabels = this.svgPointer.selectAll("xDataLabel")
+	 this.svgElements["xTickLabels"] = this.svgPointer.selectAll("xDataLabel")
 		.data(this.xAxisData)
 		.enter()
 		.append("text")
@@ -293,8 +173,11 @@ graphObject.prototype.drawAxes = function() {
 			y: this.y + 20,
 		})
 		.text(function(d) { return d.value});
+}
+
+graphObject.prototype.drawYAxis = function(){
 	//drawing the tick marks, labels, and grid lines for the Y axis	
-	 this.yTickMarks = this.svgPointer.selectAll("yTickMarks")
+	 this.svgElements["yTickMarks"] = this.svgPointer.selectAll("yTickMarks")
 		.data(this.yAxisData)
 		.enter()
 		.append("line")
@@ -305,7 +188,7 @@ graphObject.prototype.drawAxes = function() {
 			x2: this.x - 10,
 			stroke: '#000'
 		})
-	 this.yGridLines = this.svgPointer.selectAll("yGridLines")
+	 this.svgElements["yGridLines"] = this.svgPointer.selectAll("yGridLines")
 		.data(this.yAxisData)
 		.enter()
 		.append("line")
@@ -316,7 +199,7 @@ graphObject.prototype.drawAxes = function() {
 			x2: this.x + this.width,
 			stroke: '#DDD'
 		});
-	 this.yTickLabels = this.svgPointer.selectAll("yTickLabels")
+	 this.svgElements["yTickLabels"] = this.svgPointer.selectAll("yTickLabels")
 		.data(this.yAxisData)
 		.enter()
 		.append("text")
@@ -328,7 +211,7 @@ graphObject.prototype.drawAxes = function() {
 			y: function(d){ return d.loc}
 		})
 		.text(function(d){ return d.value;});
-	 this.y_axis = this.svgPointer.append("line")
+	 this.svgElements["y_axis"] = this.svgPointer.append("line")
 		.attr({
 			x1: this.x,
 			y1: this.y,
@@ -338,93 +221,59 @@ graphObject.prototype.drawAxes = function() {
 		});
 }
 
-graphObject.prototype.drawAxesLegends = function() {
-	var xLabelPadding = 55;
-	var yLabelPadding = 55;
-	var textData = [
-		{
-		text: "Liberal Rhetoric", 
-		x: this.x - yLabelPadding,
-		y: this.y - this.height/8,
-		cssClass: "demText",
-		align: "vertical"},
-		{
-		text: "Conservative Rhetoric",
-		x: this.x - yLabelPadding,
-		y: this.y - this.height*7/8,
-		cssClass: "repText",
-		align: "vertical"},
-		{
-		text: "Liberal Voter",
-		x: this.x + this.width/8,
-		y: this.y + xLabelPadding,
-		cssClass: "demText",
-		align: "horizontal"},
-		{
-		text: "Conservative Voter",
-		x: this.x + this.width*7/8 ,
-		y: this.y + xLabelPadding,
-		cssClass: "repText",
-		align: "horizontal"},
-	];
 
-	this.axesLegends = this.svgPointer.selectAll("axesLegend")
-		.data(textData)
-		.enter()
-		.append("text")
-		.attr("text-anchor", "middle")
-		.attr("alignment-baseline", "middle")
-		.attr({ 
-			class: function(d){return d.cssClass;},
-			x: function(d){return d.x;},
-			y: function(d){return d.y;},
-			transform: function(d){
-				if (d.align == "vertical")
-					return "rotate(-90 " + d.x + " " + d.y + ")";
-				return "rotate(0 0 0)";
-			},
-			id: "axesLegend"})
-		.text(function(d){return d.text});
-	console.log("HELLO");
-		
-	return this;
+//Couples the mousevents for the scatterplot and the bargraph, so they can effect eachother
+graphObject.prototype.coupleMouseEvents = function(elementStr, x, y){
+
+	this.mouseOver = elementMouseOverClosure(x, y);
+	this.mouseOut = elementMouseOutClosure();
+
+	this.svgElements[elementStr]
+		.on("mouseover", this.mouseOver)
+		.on("mouseout", this.mouseOut);
 }
-
 //Closure needed to have multiple svg-elements activate (highlight) when any one of them is highlighted
 //Ex. Mousing over the label, line plot, or color legend for any single computer / user will cause the label to increase its font
 //and the line to turn black and increase its stroke width.
-function elementMouseOverClosure(graphX, graphY){
+function elementMouseOverClosure(graphX, graphY, barSvgs, pointSvgs){
 	var elementMouseOver = function(d, i){
 		//draw lines extending to x and y axes
-		d.svgXTrace = d3.select("#mainCanvas").append("line").attr({
-			x1: d.x,
-			y1: d.y,
-			x2: d.x,
+		var pointKey = "#" + d.name + "Point";
+		var barKey = "#" + d.name + "Bar";
+		var traceX = d3.select(pointKey)[0][0].cx.baseVal.value;
+		var traceY = d3.select(pointKey)[0][0].cy.baseVal.value;
+		d.svgXTrace = d3.select("#scatterPlot").append("line").attr({
+			x1: traceX,
+			y1: traceY,
+			x2: traceX,
 			y2: graphY,
 			class: d.cssClass
 		})
-		.style("opacity", 0);
-		d.svgYTrace = d3.select("#mainCanvas").append("line").attr({
-			x1: d.x,
-			y1: d.y,
+		.style("opacity", 0)
+		.style("stroke-width", "0px");
+		d.svgYTrace = d3.select("#scatterPlot").append("line").attr({
+			x1: traceX,
+			y1: traceY,
 			x2: graphX,
-			y2: d.y,
-			class: d.cssClass
+			y2: traceY,
+			class: d.cssClass,
 		})
-		.style("opacity", 0);
-
+		.style("opacity", 0)
+		.style("stroke-width", "0px");
 		//highlight the nodes
-		d3.select(d.svgPopup).moveToFront();
-		d3.select(d.svgPoint).moveToFront();
-		d3.select(d.svgPopup).transition().style("opacity", 1);
-		d3.select(d.svgPoint).transition().attr("r", 15);
-		d.svgXTrace.transition().style("opacity",1);
-		d.svgYTrace.transition().style("opacity",1);
+		
+		d3.select(pointKey).moveToFront();
+		d3.select(pointKey).transition().attr("r", 15).style("stroke-width", "5px");
+		d3.select(barKey).moveToFront();
+		d3.select(barKey).transition().style("stroke-width", "8px");
+	
+		d.svgXTrace.transition().style("opacity",1).style("stroke-width", "3px");
+		d.svgYTrace.transition().style("opacity",1).style("stroke-width", "3px");
 
 		//fill in the information bar at the side
 		var sideBarTop = d3.select("#sideBar1").attr("class", d.cssClass +"Box sideBox");
-		document.getElementById("sideBar1").innerHTML = "<h3>" + d.name + "</h3><h2>Years in Office</h2><h3>" + d.id + "</h3>" + "<h3>IMAGE GOES HERE</h3>";
-		document.getElementById("sideBar2").innerHTML = "<h3>Vote: " + d.xVal.toFixed(2) + " %: " + Math.floor(100*d.data.votePercent) + "%</h3>" +
+		document.getElementById("sideBar1").innerHTML = "<h3>" + d.title + "</h3><h2>Years in Office</h2><h3>" + d.party + "</h3>" + "<h3>IMAGE GOES HERE</h3>";
+		document.getElementById("sideBar2").innerHTML = "<h3>Vote:   " + d.xVal.toFixed(2) + " %: " + Math.floor(100*d.data.votePercent) + "%</h3>" +
 		   "<h3>Speech: " + d.yVal.toFixed(2) + " %: " + Math.floor(100*d.data.speechPercent) + "%</h3>"	
 			+"<h2>Personal information</h2><h2>Wikipedia Link</h2><p>???Vote History???</p><p>???Speech History???</p>";
 	}
@@ -434,8 +283,10 @@ function elementMouseOverClosure(graphX, graphY){
 //Closure handling mouse out that reverts effects of the mouse-over closure
 function elementMouseOutClosure(){
 	var elementMouseOut = function(d, i){
-		d3.select(d.svgPopup).transition().style("opacity", 0);
-		d3.select(d.svgPoint).transition().attr("r", 8);
+		var pointKey = "#" + d.name + "Point";
+		var barKey = "#" + d.name + "Bar";
+		d3.select(pointKey).transition().attr("r", 8).style("stroke-width", "2px");
+		d3.select(barKey).transition().style("stroke-width", "2px");
 		d.svgXTrace.transition().style("opacity",0);
 		d.svgYTrace.transition().style("opacity",0);
 		d.svgXTrace.remove();

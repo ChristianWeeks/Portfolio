@@ -5,24 +5,38 @@
 function main(){
 	var mainWidth = 1200;
 	var mainHeight = 700;
+	var barSvgHeight = 500;
 	var topBarHeight = 80;
 	var xPadding = 150;
 	var yPadding = 150;
-	var chartWidth = mainWidth - xPadding; 
-	var chartHeight = mainHeight - yPadding; 
-	var MAIN_GRAPH = null;
+	var yBarPadding = 75;
+	var scatterWidth = mainWidth - xPadding; 
+	var scatterHeight = mainHeight - yPadding; 
+
+	var barWidth= mainWidth - xPadding; 
+	var barHeight = barSvgHeight - yPadding; 
+	var BAR_GRAPH = null;
+	var SCATTER_PLOT = null;
 	var yearButtons = new Array(10);
 	
 	//dynamically resizing the side bar.
 	d3.select("#sideBar1").style("height", (mainHeight/2) + "px");
 	
 	//This is our primary SVG that will hold the graph
-	var mainSvg = d3.select("#selfChart").append("svg")
+	var scatterSvg = d3.select("#scatterCanvas").append("svg")
 		.style("height", mainHeight)
 		.style("width", "100%")
 		.style("height", "100%")
-		.attr("id", "mainCanvas")
+		.attr("id", "scatterPlot")
 		.attr("viewBox", "0 0 " + mainWidth + " " + mainHeight)
+		.attr("preserveAspectRatio", "xMidYMid");
+
+	var barSvg = d3.select("#barCanvas").append("svg")
+		.style("height", barSvgHeight)
+		.style("width", "100%")
+		.style("height", "100%")
+		.attr("id", "barCanvas")
+		.attr("viewBox", "0 0 " + mainWidth + " " + barSvgHeight)
 		.attr("preserveAspectRatio", "xMidYMid");
 
 	//top bar contains buttons for loading different years of data and will contain later features
@@ -131,15 +145,26 @@ function main(){
 
 				var graphData = configureData(senateData);
 				//generate the graph if this is the first call.  Else, just redraw the points
-				if(!MAIN_GRAPH){
-					MAIN_GRAPH = new graphObject(xPadding * 2 / 3, mainHeight-(yPadding / 2) - 30, mainWidth - xPadding, mainHeight-yPadding, mainSvg);
-					MAIN_GRAPH.setTitleY("Speech Position");
-					MAIN_GRAPH.setTitleX("Vote Position");
+				if(!SCATTER_PLOT){
+					SCATTER_PLOT = new scatterPlot(xPadding * 2 / 3, mainHeight-(yPadding / 2) - 30, scatterWidth, scatterHeight, scatterSvg);
+					SCATTER_PLOT.setTitleY("Speech Position");
+					SCATTER_PLOT.setTitleX("Vote Position");
 				}
 				//remove all of the previous svgs when loading a new year
 				else
-					MAIN_GRAPH.destroyAll();	
-				MAIN_GRAPH.setData(graphData);	
+					SCATTER_PLOT.destroyAll();	
+
+				if(!BAR_GRAPH){
+					BAR_GRAPH = new barGraph(xPadding * 2 / 3, barSvgHeight-(yPadding / 2) - 30, barWidth, barHeight, barSvg);
+					BAR_GRAPH.setTitleY("Delta");
+				}
+				//remove all of the previous svgs when loading a new year
+				else
+					BAR_GRAPH.destroyAll();	
+				SCATTER_PLOT.setData(graphData);	
+				BAR_GRAPH.setData(graphData);	
+				SCATTER_PLOT.coupleMouseEvents("points",SCATTER_PLOT.x, SCATTER_PLOT.y);
+				BAR_GRAPH.coupleMouseEvents("bars", SCATTER_PLOT.x, SCATTER_PLOT.y);
 			});
 	}
 
@@ -164,3 +189,4 @@ function main(){
 	readDataCSV();
 }
 main();
+

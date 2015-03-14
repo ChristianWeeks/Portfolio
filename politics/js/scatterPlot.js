@@ -1,16 +1,15 @@
 "use strict";
 //The graph object draws the graph and interpolates its axis boundaries based on the data it is fed
-function barGraph(x, y, width, height, svg){
-	barGraph.superClass.constructor.call(this, x, y, width, height, svg);
-	this.yMax = 0.5;
-	this.yMin = -0.5;
+function scatterPlot(x, y, width, height, svg){
+	scatterPlot.superClass.constructor.call(this, x, y, width, height, svg);
+	console.log(this.x);
+	this.svgPoints = [];
 }
-extend(barGraph, graphObject);
+extend(scatterPlot, graphObject);
 
 //changes the value that is currently displayed (total tasks, seconds / task, delay / task, etc.) by modifying
 //the data object that will ALWAYS be graphed
-barGraph.prototype.setYAttr = function (){
-	this.destroyAll();
+scatterPlot.prototype.setYAttr = function (){
 	//add 1 to the length so that the final value isn't on the very edge of the graph
 	var count = 0;
 	//calculating the maximum value in the new set
@@ -18,8 +17,6 @@ barGraph.prototype.setYAttr = function (){
 
 	this.setAxes();
 	this.firstTimeData = null;
-	this.x_step = this.width / (this.data.length + 1);
-	this.barWidth = this.x_step;
 	for (var i in this.data){
 		var cssClass;
 		if(this.data[i].id == "R")
@@ -28,63 +25,70 @@ barGraph.prototype.setYAttr = function (){
 			cssClass = "dem";
 		else
 			cssClass = "ind";
+
 		var nameSubStr = this.data[i].name.substring(0, this.data[i].name.length - 5);
 		this.currentlyViewedData[i] = {
 			"data": this.data[i],
-			"id": nameSubStr + "Bar",
+			"id": nameSubStr + "Point",
 			"title": this.data[i].name,
 			"party": this.data[i].id,
 			"name": nameSubStr,
 			"xVal": this.data[i].x,
 			"yVal": this.data[i].y,
-			"width": this.barWidth,
-			"yTop": (this.data[i].delta > 0) ? this.mapYValToGraph(this.data[i].delta) : this.mapYValToGraph(0),
-			"yBot": (this.data[i].delta <= 0) ? this.mapYValToGraph(this.data[i].delta) : this.mapYValToGraph(0),
-			"x": this.x + (this.x_step / 2) + (count * this.x_step),
+			"y": this.mapYValToGraph(this.data[i].y),
+			"x": this.mapXValToGraph(this.data[i].x),
 			"cssClass": cssClass,
-			"svgBar": null,
+			"svgLabel": null,
 		};
-		//	console.log(this.mapYValToGraph(this.data[i].y));
-		//	console.log(this.mapXValToGraph(this.data[i].x));
-		count++;
 	}
 	this.draw()
-		//setTimeout(this.draw(), 5000);
-
 }
 	
-barGraph.prototype.draw = function(){	
-	this.mouseOver = elementMouseOverClosure(this.x, this.y);
-	this.mouseOut = elementMouseOutClosure();
-	this.drawBars();
+scatterPlot.prototype.draw = function(){
+	
+//	this.mouseOver = elementMouseOverClosure(this.x, this.y);
+//	this.mouseOut = elementMouseOutClosure();
+	this.drawPoints();
 
 	this.drawYAxisLabel();
+	this.drawXAxisLabel();
+	this.drawAxesLegends();
 	this.drawYAxis();
+	this.drawXAxis();
+	this.drawTitle();
 }
+
 
 //------------------------------------------------------------------------------------------------------
 //DRAW METHODS - Everything below handles the brunt of the D3 code and draws everything to the canvas
 //------------------------------------------------------------------------------------------------------
-//Creates the the bars in the bar graph view
-barGraph.prototype.drawBars = function(){
-	 this.svgElements["bars"] = this.svgPointer.selectAll("Bars")
+
+//Creates the points 
+scatterPlot.prototype.drawPoints= function(){
+	 this.svgElements["points"] = this.svgPointer.selectAll("Points")
 		.data(this.currentlyViewedData)
 		.enter()
-		.append("rect")	
-		.attr("id", function(d){return d.id})
-		.attr("class", function(d){return d.cssClass})
+		.append("circle")	
+		.attr("class", function(d){return d.cssClass;})
+		.attr("id", function(d){ return d.id;})
 		.style("stroke-width", "2px")
+
+	//	.style("fill", function(d) {return d.color})
+	//	.style("stroke", function(d) {return d.color})
+	//	.style("stroke-width", 0)
 		.attr({
-			x: function(d) { 
-				d.svgBar = this;
-				return d.x - (d.width / 2);},
-			y: function(d) {return d.yTop;},
-			height: function(d){ return d.yBot - d.yTop}, 
-			width: function(d){return d.width} 
+			cx: function(d) {
+			   	d.svgPoint = this;
+				return d.x;},
+			cy: function(d) {return d.y;},
+			r: 8,//function(d) {return d.r;},
 		});
+//		.on("mouseover", this.mouseOver)
+//		.on("mouseout", this.mouseOut);
 }
 
-graphObject.prototype.drawAxesLegends = function() {
+
+scatterPlot.prototype.drawAxesLegends = function() {
 	var xLabelPadding = 55;
 	var yLabelPadding = 55;
 	var textData = [

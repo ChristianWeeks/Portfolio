@@ -1,3 +1,6 @@
+
+
+
 TODO:
 
 DONE***Make graph dynamically resizeable
@@ -13,12 +16,13 @@ DONE***Add delta bar graph
 
 DONE***fix delta bar graph sorting
 
-***Fix axes and labels for delta bar graph
+DONE***Fix axes and labels for delta bar graph
+
+DONE***Fix code structure so the bar graph and scatter plots combine with minimal excess overhead
+
+DONE***couple mouseover events between bar and scatter plots
 
 ***Add colorized speech and vote scores and percentages
-
-***Fix code structure so the bar graph and scatter plots combine with minimal excess overhead
-
 
 NEEDS MORE THOUGHT***create an SVG GROUP object that contains a vector of svgs.  On mouseover, the SVG GROUP will
 activate the mouseover effects of each svg in the vector.  This will conveniently allow for multiple
@@ -37,8 +41,14 @@ It will also allow for svg items to be added and removed just by putting them in
 
 ***Decide how values will pop up- will they appear on axes, or on the side bar with everything else?
 
-
 OPTIONS:
 ***Turn confidence intervals on or off
 
 ***Search or filter
+
+
+----------------------------------------------------------------------------------------------------------------
+CURRENT GLITCHES
+----------------------------------------------------------------------------------------------------------------
+Mouseover sometimes corresponds to the wrong element on the other canvas.  This is because the points are identified by last names, and some senators
+have the same last name.  This will be resolved once I have data including first and last names.
