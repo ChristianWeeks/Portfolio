@@ -54,6 +54,10 @@ graphObject.prototype.setAxes = function(){
 	}
 	return this;
 }
+graphObject.prototype.setTitle = function(titleStr){
+	this.title = titleStr;
+	return this;
+}
 
 graphObject.prototype.setTitleY = function(titleStr){
 	this.titleY = titleStr;
@@ -104,7 +108,7 @@ graphObject.prototype.drawTitle = function(){
 			x: this.x + this.width/2,
 			y: this.y - this.height
 		})
-		.text(this.titleY + " by " + this.titleX);
+		.text(this.title ? this.title : (this.titleY + " by " + this.titleX));
 }
 
 //label for the y axis

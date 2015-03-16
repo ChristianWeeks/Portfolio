@@ -60,6 +60,10 @@ barGraph.prototype.draw = function(){
 
 	this.drawYAxisLabel();
 	this.drawYAxis();
+
+	//Label the x axis for senators, but no need to draw the actual axis, as it isn't a measurement
+	this.drawXAxisLabel();
+	this.drawTitle();
 }
 
 //------------------------------------------------------------------------------------------------------
@@ -82,56 +86,4 @@ barGraph.prototype.drawBars = function(){
 			height: function(d){ return d.yBot - d.yTop}, 
 			width: function(d){return d.width} 
 		});
-}
-
-graphObject.prototype.drawAxesLegends = function() {
-	var xLabelPadding = 55;
-	var yLabelPadding = 55;
-	var textData = [
-		{
-		text: "Liberal Rhetoric", 
-		x: this.x - yLabelPadding,
-		y: this.y - this.height/8,
-		cssClass: "demText",
-		align: "vertical"},
-		{
-		text: "Conservative Rhetoric",
-		x: this.x - yLabelPadding,
-		y: this.y - this.height*7/8,
-		cssClass: "repText",
-		align: "vertical"},
-		{
-		text: "Liberal Voter",
-		x: this.x + this.width/8,
-		y: this.y + xLabelPadding,
-		cssClass: "demText",
-		align: "horizontal"},
-		{
-		text: "Conservative Voter",
-		x: this.x + this.width*7/8 ,
-		y: this.y + xLabelPadding,
-		cssClass: "repText",
-		align: "horizontal"},
-	];
-
-	this.svgElements["axesLegends"] = this.svgPointer.selectAll("axesLegend")
-		.data(textData)
-		.enter()
-		.append("text")
-		.attr("text-anchor", "middle")
-		.attr("alignment-baseline", "middle")
-		.attr({ 
-			class: function(d){return d.cssClass;},
-			x: function(d){return d.x;},
-			y: function(d){return d.y;},
-			transform: function(d){
-				if (d.align == "vertical")
-					return "rotate(-90 " + d.x + " " + d.y + ")";
-				return "rotate(0 0 0)";
-			},
-			id: "axesLegend"})
-		.text(function(d){return d.text});
-	console.log("HELLO");
-		
-	return this;
 }

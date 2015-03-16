@@ -93,25 +93,25 @@ scatterPlot.prototype.drawAxesLegends = function() {
 	var yLabelPadding = 55;
 	var textData = [
 		{
-		text: "Liberal Rhetoric", 
+		text: "Liberal", 
 		x: this.x - yLabelPadding,
 		y: this.y - this.height/8,
 		cssClass: "demText",
 		align: "vertical"},
 		{
-		text: "Conservative Rhetoric",
+		text: "Conservative",
 		x: this.x - yLabelPadding,
 		y: this.y - this.height*7/8,
 		cssClass: "repText",
 		align: "vertical"},
 		{
-		text: "Liberal Voter",
+		text: "Liberal",
 		x: this.x + this.width/8,
 		y: this.y + xLabelPadding,
 		cssClass: "demText",
 		align: "horizontal"},
 		{
-		text: "Conservative Voter",
+		text: "Conservative",
 		x: this.x + this.width*7/8 ,
 		y: this.y + xLabelPadding,
 		cssClass: "repText",

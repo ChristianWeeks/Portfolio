@@ -147,8 +147,7 @@ function main(){
 				//generate the graph if this is the first call.  Else, just redraw the points
 				if(!SCATTER_PLOT){
 					SCATTER_PLOT = new scatterPlot(xPadding * 2 / 3, mainHeight-(yPadding / 2) - 30, scatterWidth, scatterHeight, scatterSvg);
-					SCATTER_PLOT.setTitleY("Speech Position");
-					SCATTER_PLOT.setTitleX("Vote Position");
+					SCATTER_PLOT.setTitleY("Speech Position").setTitleX("Vote Position");
 				}
 				//remove all of the previous svgs when loading a new year
 				else
@@ -156,7 +155,7 @@ function main(){
 
 				if(!BAR_GRAPH){
 					BAR_GRAPH = new barGraph(xPadding * 2 / 3, barSvgHeight-(yPadding / 2) - 30, barWidth, barHeight, barSvg);
-					BAR_GRAPH.setTitleY("Delta");
+					BAR_GRAPH.setTitle("Difference between Speech Position and Vote Position").setTitleY("Delta").setTitleX("Senator");
 				}
 				//remove all of the previous svgs when loading a new year
 				else
