@@ -53,74 +53,92 @@
 	<div class="container-fluid">
 		<div class=" repeatBorder" role="navigation">
 		  <div class="container">
-		    <div class="navbar-collapse collapse">
-		      <ul class="nav navbar-nav navFont">
-				<li class="darkBlue"><a href="index.html" class="navFont">Home</a></li>
-				<li class="navFont darkGreen"><a href="demoReel.html"class="navFont">Demo Reel</a></li>
-				<li class="active darkRed darkActive"><a href="code.html" style="color: black">Code</a></li>
-				<li class="darkYellow"><a href="art.html"class="navFont">Art</a></li>
-		      </ul>
-		    </div>
+			<div class="navbar-collapse collapse">
+			  <ul class="headerWidth nav navbar-nav navFont">
+				<li class="navWidth navFont steel1"><a href="index.html"class="navFont">Home</a></li>
+				<li class="navWidth navFont steel2"><a href="demoReel.html"class="navFont">Demo Reel</a></li>
+				<li class="navWidth darkActive"><a href="code.html" style="color:black">Projects</a></li>
+				<li class="navWidth navFont steel2"><a href="art.html"class="navFont">Art</a></li>
+			  </ul>
+			</div>
 		  </div>
 		</div>
 	</div>
 	  <div class="container">
-	   <a id="game"></a>
-	   <h1>C / C++</h1>
+	   <h1 class="codeTitle">Computer Graphics and Animation</h1>
 	   <hr class="featurette-divider">
 		<div class="row featurette">
 			<div class="col-md-7 displayRow.lg">
-				<h2 class="featurette-heading">2-D Game Engine</h2>
-				<p>Game engine built from scratch in C++ SDL.  The player must reach the end of the level to retrieve an object while avoiding nasty apparitions. Features collision detection, parallax scrolling, primitive AI, and animated sprites.  Strict coding procedures and design patterns were necessities.  All art assets are also original work by me. </p>
+			   <a id="galaxy"></a>
+				<h2 class="projectTitle">N-Body Galaxy Simulation</h2>
+				<p style="font-size: 16px">Art directable simulation of the <a href="https://en.wikipedia.org/wiki/N-body_problem">n-body problem</a> run with OpenGL and accelerated in OpenCL.  9216 total particles.  Particles are hashed into a spatial grid which accumulates total mass and center of gravity for each cell, which are then used for gravitational calculations.  Art direction is prioritized over physical accuracy, so a vector field was added that nudges particles into the form of spiral galaxies most people are familiar with.  Different simulations are achieved by passing in parameter files that control features like the particle's initial position, the gravitational constant, and the strength of the vector field.</p>
+		<img src="images/opengl-logo.gif" style="height:20%;width:20%"/>
+		<img src="images/openCLLogo.png" style="height:15%;width:15%"/>
+			</div>	
+			<div class="col-md-5 displayRow.lg">
+				<iframe src="https://player.vimeo.com/video/147887169" width="267" height="200" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
+			</div>
+		</div>
+	   <hr class="featurette-divider">
+		<div class="row featurette">
+			<div class="col-md-7">
+			   <a id="sqm"></a>
+				<h2 class="projectTitle"><a href="http://www.nexusmods.com/skyrim/mods/72238/?">Souls Quick Menu</a></h2>
+				<p style="font-size: 16px">Souls Quick Menu is a User Interface mod I developed for the video game <i>The Elder Scrolls V: Skyrim</i>.  It provides a quicker way of accessing many items, weapons, and spells than Skyrim's default hotkey system, resulting in more fluid gameplay and fewer trips to the pause menu.  The mod currently has over <b>6000 downloads and 450 player endorsements</b>. Developed in Bethesda's Creation Kit and Actionscript 2.0.</p>
+
+		<img src="images/creationKitIcon.png"/>
+		<img src="images/ActionScript_icon.png" style="height:12%;width:12%"/>
+			</div>
+			<div class="col-md-5 displayRow">
+				<iframe width="267" height="200" src="https://www.youtube.com/embed/r0FRgQ-5qpQ" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+	   <hr class="featurette-divider">
+		<div class="row featurette">
+			<div class="col-md-7 displayRow.lg">
+			   <a id="crustacean"></a>
+				<h2 class="projectTitle">Craving Crustacean</h2>
+				<p style="font-size: 16px">Craving Crustacean is a 3-D animated short developed by myself and 3 others and with direct mentorship of top DreamWorks artists. The production environment mimicked a professional work environment with bi-weekly meetings with DreamWorks mentors, strict schedules, and long hours.  I was lead rigger, animator, and visual developer.</p>
+		<img src="images/mayaLogo.jpg" style="height:12%;width:12%"/>
+			</div>	
+			<div class="col-md-5 displayRow.lg">
+				<iframe src="https://player.vimeo.com/video/136538548" width="267" height="200" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
+			</div>
+		</div>
+	   <hr class="featurette-divider">
+		<div class="row featurette">
+			<div class="col-md-7 displayRow.lg">
+				<h2 class="projectTitle">2-D Game Engine</h2>
+				<p style="font-size: 16px">Game engine built from scratch in C++ SDL.  The player must reach the end of the level to retrieve an object while avoiding nasty apparitions. Features collision detection, parallax scrolling, primitive AI, and animated sprites.  Strict coding procedures and design patterns were necessities.  All art assets are also original work by me. </p>
 				<a href="https://github.com/ChristianWeeks/416-SDL-Game"><img src="images/GitHub_Logo.png" class="gitLogo"/>  All assets available on Github</a>
 			</div>	
 			<div class="col-md-5 displayRow.lg">
 				<iframe src="https://player.vimeo.com/video/115582725" width="267" height="200" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
 			</div>
 		</div>
-	   <hr class="featurette-divider">
-		<div class="row featurette">
-			<div class="col-md-7">
-				<h2 class="featurette-heading">2-D Image Morpher</h2>
-				<p>This program implements the <a href="http://www1.cs.columbia.edu/~cs4162/slides/p35-beier.pdf">Beier-Neely algorithm</a> for image morphing.  It will take two images as input and create a "morph" transition between the two by marking corresponding features (like eyes, nose, mouth) on each image.  The user picks corresponding anchor points on each image in a GUI and the algorithm then outputs a 48 frame transition between the two images. </p>
-
-			</div>
-			<div class="col-md-5 displayRow"><iframe src="https://player.vimeo.com/video/83781536" width="267" height="200" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-			<!--<a href="images/tigerLeopardAnchors.png" class="highslide" onclick="return hs.expand(this)">
-					<img src="images/tigerLeopardAnchorsThumb.png" alt="Blah" title="Click to Enlarge">
-				</a>
-				<div class="highslide-caption">The anchor configuration for the tiger to leopard image morph</div>-->	
-			</div>
-		</div>
-	   <a id="ray"></a>
-	   <hr class="featurette-divider">
-		<div class="row featurette">
-			<div class="col-md-7">
-				<h2 class="featurette-heading">Ray Tracer</h2>
-				<p>This ray tracer reads in a document containing the coordinates and properties of objects in the scene.  Outputs a single ray traced image of the scene.  The project was written purely in C in a pseudo object oriented fashion that organizes objects into many structures and files.  An object's members are accessed with pointers.</p>
-			</div>	
-			<div class="col-md-5">
-				<div class="row">
-					<div class="col-md-3"></div>
-					<div class="col-md-6 displayRow">
-						<a href="images/rayTracer1.jpeg" class="highslide displayImg" onclick="return hs.expand(this)">
-							<div class="displayCell sm displayColorYellow">
-								<img src="images/rayTracer1.jpeg" class="displayImg" alt="Blah" title="Click to Enlarge">
-							</div>
-						</a>
-					</div>
-					<div class="col-md-3"></div>
-				</div>
-			</div>
-		</div> 
 		<div class="row repeatBorderSmall" style="height: 20px"></div>
 		<a id="vis"></a>
-	    <h1>Javascript</h1>
+	    <h1 class="codeTitle">Data Visualization</h1>
 	    <hr class="featurette-divider">
 		<div class="row featurette">
 			<div class="col-md-7 displayRow.lg">
-				<h2 class="featurette-heading"><a href="DPAView/index.html">DPAView - Interactive Pipeline Visualization</a></h2>
-				<p>There are over 250,000 archived logs of tasks submitted to Clemson's production pipeline in the past year and a half. DPAView is an interactive web visualization that allows users to view and sort the data in order to tell if the pipeline is operating as it should.  Users can view things like the average time a machine takes to execute a task or the total tasks submitted by different users.  It also has a time view that shows how these attributes change over time.  <a href="DPAView/index.html">View the visualization here</a></p> 
+			   <a id="wordShoal"></a>
+				<h2 class="projectTitle"><a href="http://christianweeks.github.io/wordShoal/">WordShoal</a></h2>
+				<p style="font-size: 16px">WordShoal is an algorithm developed by Alexander Herzog (Clemson University) and Benjamin E. Lauderdale (London School of Economics and Political Science) that measures political polarization by analyzing the speech patterns of senators through debates on the senate floor.  This interactive visualization depicts the results of their paper, allowing users to view the individualized speech scores for every United States Senator in the past 15 years.  Users can compare how conservative or liberal their Senators speak compared to their peers and even view how they spoke in every debate on the senate floor they have ever participated in.</p> 
+				<p><img src="images/D3.js-Logo.png" style="height: 40%; width: 40%;"/></p>
+			</div>
+			<div class="col-md-5 displayRow">
+				<div class="displayCellLarge steelBorder">
+					<img src="images/wordshoal1.png" class="displayImg"/>
+				</div>
+			</div>
+		</div>
+	    <hr class="featurette-divider">
+		<div class="row featurette">
+			<div class="col-md-7 displayRow.lg">
+			   <a id="DPAView"></a>
+				<h2 class="projectTitle"><a href="DPAView/index.html">DPAView - Pipeline Visualization</a></h2>
+				<p style="font-size: 16px">There are over 250,000 archived logs of tasks submitted to Clemson's production pipeline in the past year and a half. DPAView is an interactive web visualization that allows users to view and sort the data in order to tell if the pipeline is operating as it should.  Users can view things like the average time a machine takes to execute a task or the total tasks submitted by different users.  It also has a time view that shows how these attributes change over time.  <a href="DPAView/index.html">View the visualization here</a></p> 
 				<a href="https://github.com/ChristianWeeks/DPAView/tree/master/finalProject"><img src="images/GitHub_Logo.png" class="gitLogo"/>  All assets available on Github</a>
 				<p><img src="images/D3.js-Logo.png" style="height: 40%; width: 40%;"/></p>
 			</div>
@@ -128,14 +146,14 @@
 				<div class="row">
 					<div class="col-md-6 displayRowSm">
 						<a href="images/dpaviewEx1.png" class="highslide displayImg" onclick="return hs.expand(this)">
-							<div class="displayCell sm displayColorYellow">
+							<div class="displayCell sm steelBorder">
 								<img src="images/dpaviewEx1.png" class="displayImg" alt="Blah" title="Click to Enlarge">
 							</div>
 						</a>
 					</div>
 					<div class="col-md-6 displayRowSm">
 						<a href="images/dpaviewEx2.jpg" class="highslide displayImg" onclick="return hs.expand(this)">
-							<div class="displayCell sm displayColorBlue">
+							<div class="displayCell sm steelBorder">
 								<img src="images/dpaviewEx2.jpg" class="displayImg" alt="Blah" title="Click to Enlarge">
 							</div>
 						</a>
@@ -144,14 +162,14 @@
 				<div class="row">
 					<div class="col-md-6 displayRowSm">
 						<a href="images/dpaviewEx3.png" class="highslide displayImg" onclick="return hs.expand(this)">
-							<div class="displayCell sm displayColorRed">
+							<div class="displayCell sm steelBorder">
 								<img src="images/dpaviewEx3.png" class="displayImg" alt="Blah" title="Click to Enlarge">
 							</div>
 						</a>
 					</div>
 					<div class="col-md-6 displayRowSm">
 						<a href="images/dpaview3.png" class="highslide displayImg" onclick="return hs.expand(this)">
-							<div class="displayCell sm displayColorGreen">
+							<div class="displayCell sm steelBorder">
 								<img src="images/dpaview3.png" class="displayImg" alt="Blah" title="Click to Enlarge">
 							</div>
 						</a>
@@ -162,23 +180,23 @@
 	   <hr class="featurette-divider">
 		<div class="row featurette">
 			<div class="col-md-7 displayRow.lg">
-				<h2 class="featurette-heading">Interactive Sentimented Word Clouds</h2>
-				<p>Designed to be a more interactive and engaging word cloud, this visualization reads in large volumes of sentimented twitter data from an elasticsearch database and then creates force-directed word clouds for words with positive, negative, and neutral sentiment.  Mousing over nodes shows connections between the same words in different clouds and shows the total percent that word makes up out of all positive/negative/neutral tweets.</p>
-				<p>This code is part of a larger visualization project that does not belong to me, so I cannot make the source code publicly available.</p>
+			   <a id="sentiment"></a>
+				<h2 class="projectTitle">Interactive Sentimented Word Clouds</h2>
+				<p style="font-size: 16px">Designed to be a more interactive and engaging word cloud, this visualization reads in large volumes of sentimented twitter data from an elasticsearch database and then creates force-directed word clouds for words with positive, negative, and neutral sentiment.  Mousing over nodes shows connections between the same words in different clouds and shows the total percent that word makes up out of all positive/negative/neutral tweets.</p>
 				<p><img src="images/D3.js-Logo.png" style="height: 40%; width: 40%;"/></p>
 			</div>
 			<div class="col-md-4">
 				<div class="row">
 					<div class="col-md-6 displayRowSm">
 						<a href="images/wordCloudEx.png" class="highslide displayImg" onclick="return hs.expand(this)">
-							<div class="displayCell sm displayColorYellow">
+							<div class="displayCell sm steelBorder">
 								<img src="images/wordCloudEx.png" class="displayImg" alt="Blah" title="Click to Enlarge">
 							</div>
 						</a>
 					</div>
 					<div class="col-md-6 displayRowSm">
 						<a href="images/wordCloudEx2.png" class="highslide displayImg" onclick="return hs.expand(this)">
-							<div class="displayCell sm displayColorBlue">
+							<div class="displayCell sm steelBorder">
 								<img src="images/wordCloudEx2.png" class="displayImg" alt="Blah" title="Click to Enlarge">
 							</div>
 						</a>
@@ -187,14 +205,14 @@
 				<div class="row">
 					<div class="col-md-6 displayRowSm">
 						<a href="images/wordCloudEx3.png" class="highslide displayImg" onclick="return hs.expand(this)">
-							<div class="displayCell sm displayColorGreen">
+							<div class="displayCell sm steelBorder">
 								<img src="images/wordCloudEx3.png" class="displayImg" alt="Blah" title="Click to Enlarge">
 							</div>
 						</a>
 					</div>
 					<div class="col-md-6 displayRowSm">
 						<a href="images/wordCloudEx4.png" class="highslide displayImg" onclick="return hs.expand(this)">
-							<div class="displayCell sm displayColorRed">
+							<div class="displayCell sm steelBorder">
 								<img src="images/wordCloudEx4.png" class="displayImg" alt="Blah" title="Click to Enlarge">
 							</div>
 						</a>
@@ -208,7 +226,7 @@
 	    <hr class="featurette-divider">
 		<div class="row featurette">
 			<div class="col-md-7 displayRow.lg">
-				<h2 class="featurette-heading">2-D Image Morpher</h2>
+				<h2 class="projectTitle">2-D Image Morpher</h2>
 				<p>An implementation of the marching squares algorithm (the 2-D version of the <a href="SOURCEHERE">Marching Cubes</a> algorithm), this program
 			</div>
 		</div>-->

@@ -19,7 +19,7 @@
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
     </head>
-    <body>
+    <body id="bootstrapOverride">
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -30,11 +30,11 @@
 			<div class=" repeatBorder" role="navigation">
 			  <div class="container">
 			    <div class="navbar-collapse collapse">
-			      <ul class="nav navbar-nav navFont">
-					<li class="active darkBlue darkActive"><a href="index.html" style="color:black">Home</a></li>
-					<li class="navFont darkGreen"><a href="demoReel.html"class="navFont">Demo Reel</a></li>
-					<li class="navFont darkRed"><a href="code.html" class="navFont">Code</a></li>
-					<li class="navFont darkYellow"><a href="art.html"class="navFont">Art</a></li>
+			      <ul class="headerWidth nav navbar-nav navFont">
+					<li class="navWidth active darkActive"><a href="index.html" style="color:black">Home</a></li>
+					<li class="navWidth navFont steel2"><a href="demoReel.html"class="navFont">Demo Reel</a></li>
+					<li class="navWidth navFont steel1"><a href="code.html" class="navFont">Projects</a></li>
+					<li class="navWidth navFont steel2"><a href="art.html"class="navFont">Art</a></li>
 			      </ul>
 			    </div>
 			  </div>
@@ -46,64 +46,114 @@
 				Christian Weeks
 			</div>
 			<div class="row">
-				<p> <span class="aboutFont">I'm a graduate student in Clemson University's Digital Production Arts MFA program.  I graduated <span class="fontBlue highlight">cum laude</span> from Clemson University in 2014 with a degree in <span class="fontRed highlight">computer science</span> and minor in <span class="fontGreen highlight">visual arts</span>.  I'm passionate about anything that combines the arts and the sciences and have built my portfolio around <span class="fontBlue highlight">visualization</span>, <span class="fontYellow"> visual art </span>, and <span class="fontRed highlight">computer graphics</span>.  Click on any of the images below to view some of my projects or my <a href="demoReel.html"><span class="fontGreen highlight">Demo Reel</span></a>.</span></p>	
-			</div>
-		<!--	<div class="row">
-				<div class="col-lg-4 sectionTitle" align="center">
-					Visualization
-				</div>
-				<div class="col-lg-4 sectionTitle" align="center">
-					Animation
-				</div>
-				<div class="col-lg-4 sectionTitle" align="center">
-					Art
-				</div>
-			</div>-->
+	<!--			<p> <span class="aboutFont">I'm a graduate student in Clemson University's Digital Production Arts MFA program.  I graduated <span class="fontBlue highlight">cum laude</span> from Clemson University in 2014 with a degree in <span class="fontRed highlight">computer science</span> and minor in <span class="fontGreen highlight">visual arts</span>.  I'm passionate about anything that combines the arts and the sciences and have built my portfolio around <span class="fontBlue highlight">visualization</span>, <span class="fontYellow"> visual art </span>, and <span class="fontRed highlight">computer graphics</span>.  Click on any of the images below to view some of my projects or my <a href="demoReel.html"><span class="fontGreen highlight">Demo Reel</span></a>.</span></p>	
+	--!>		</div>
 			<div class="row">
-				<div class="col-md-2"></div>
-				<div class="col-md-8">
+				<div class="col-lg-4 sectionTitle" align="center">
+					<a href="code.html">CG and Animation</a>
+				</div>
+				<div class="col-lg-4 demoReelTitle" align="center">
+					<a href="demoReel.html">Demo Reel</a>
+				</div>
+				<div class="col-lg-4 sectionTitle" align="center">
+					<a href="code.html#vis">Visualization</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
 					<!-- Grid to display images -->
-					<div class="row">
+					<div class="row" style="height: 650px">
 						<div class="col-md-4 displayRow" >
-							<a href="code.html#vis">
-								<div class="displayCell displayColorGreen">	
-									<img src="images/wordCloudEx.png" class="displayImg"/>
+							<div class="col-md-6">
+								<a href="code.html#galaxy">
+									<div class="displayCell steelBorder">	
+										<img src="images/galaxy2.png" class="displayImg"/>
+									</div>
+								</a>
+								<a href="code.html#sqm">
+									<div class="displayCell steelBorder">	
+										<img src="images/SQM1.jpg" class="displayImg"/>
+									</div>
+								</a>
+								<a href="code.html#crustacean">
+									<div class="displayCell steelBorder">	
+										<img src="images/crustacean1.png" class="displayImg"/>
+									</div>
+								</a>
+							</div>
+							<div class="col-md-6" style="padding-left: 0px; padding-right: 5px">
+								<div class="displayCaption">
+									<p class="captionTitle"><a href="code.html#galaxy">Galaxy Simulation</a></p>
+									<p>N-Bodies gravitational simulation written in OpenGL and accelerated with  OpenCL.</p>
+								</div>
+								<div class="displayCaption">
+									<p class="captionTitle"><a href="code.html#sqm">Souls Quick Menu</a></p>
+									<p>UI mod for the <i>The Elder Scrolls V: Skyrim</i>. Over 6000 unique downloads and 450 endorsements.								</div>
+								<div class="displayCaption">
+									<p class="captionTitle"><a href="code.html#crustacean">Craving Crustacean</a></p>
+									<p>Animated short created with the guidance of DreamWorks Animated artists.</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 displayRow" >
+							<a href="demoReel.html">
+								<div class="displayVidCell demoReelBorder">	
+									<img src="images/cravingCrustacean2.png" class="displayImg" />
 								</div>
 							</a>
 						</div>
 						<div class="col-md-4 displayRow" >
-							<a href="code.html#game">
-								<div class="displayCell displayColorRed">	
-									<img src="images/gameImg2.png" class="displayImg" />
+							<div class="col-md-6" style="padding-left: 0px; padding-right: 5px">
+								<div class="displayCaption">
+									<p class="captionTitle"><a href="code.html#wordShoal">WordShoal</a></p>
+									<p>Interactive visualization that show's political partisanship based on senatorial speech patterns</p>
 								</div>
-							</a>
-						</div>
-						<div class="col-md-4 displayRow" align="center">
-							<a href="art.html#other">
-								<div class="displayCell displayColorBlue">	
-									<img src="images/OilPortrait.gif" class="displayImg"/>
+								<div class="displayCaption">
+									<p class="captionTitle"><a href="code.html#DPAView">DPAView</a></p>
+									<p>Analytical visualization depicting all tasks submitted to the Clemson University's VFX pipeline.</p>
 								</div>
-							</a>
+								<div class="displayCaption">
+									<p class="captionTitle"><a href="code.html#sentiment">Sentiment Word Clouds</a></p>
+									<p>Interactive, sortable word clouds showing connections in sentimented twitter data</p>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<a href="code.html#wordShoal">
+									<div class="displayCell steelBorder">	
+										<img src="images/wordshoal1.png" class="displayImg"/>
+									</div>
+								</a>
+								<a href="code.html#DPAView">
+									<div class="displayCell steelBorder">	
+										<img src="images/dpaviewEx1.png" class="displayImg"/>
+									</div>
+								</a>
+								<a href="code.html#sentiment">
+									<div class="displayCell steelBorder">	
+										<img src="images/wordCloudEx.png" class="displayImg"/>
+									</div>
+								</a>
+							</div>
 						</div>
 					</div>
-					<div class="row">
+					<!--<div class="row">
 						<div class="col-md-4 displayRow " >
 							<a href="art.html">
-								<div class="displayCell displayColorYellow">	
+								<div class="displayCell steelBorder">	
 									<img src="images/FutureCity.gif" class="displayImg"/>
 								</div>
 							</a>
 						</div>
 						<div class="col-md-4 displayRow" >
 							<a href="demoReel.html">
-								<div class="displayCell displayColorBlue">	
+								<div class="displayCell steelBorder">	
 									<img src="images/model2.png" class="displayImg"/>
 								</div>
 							</a>
 						</div>
 						<div class="col-md-4 displayRow" >
 							<a href="art.html#still">
-								<div class="displayCell displayColorGreen">	
+								<div class="displayCell steelBorder">	
 									<img src="images/StillLife3.gif" class="displayImg"/>
 								</div>
 							</a>
@@ -112,30 +162,26 @@
 					<div class="row">
 						<div class="col-md-4 displayRow" >
 							<a href="art.html#other">
-								<div class="displayCell displayColorGreen">	
+								<div class="displayCell steelBorder">	
 									<img src="images/ref1.png" class="displayImg"/>
 								</div>
 							</a>
 						</div>
 						<div class="col-md-4 displayRow" >
 							<a href="code.html#ray">
-								<div class="displayCell displayColorRed">	
+								<div class="displayCell steelBorder">	
 									<img src="images/rayTracer1.jpeg" class="displayImg" />
 								</div>
 							</a>
 						</div>
 						<div class="col-md-4 displayRow" >
 							<a href="code.html#vis">
-								<div class="displayCell displayColorYellow">	
+								<div class="displayCell steelBorder">	
 									<img src="images/dpaview3.png" class="displayImg"/>
 								</div>
 							</a>
 						</div>
-					</div>
-				<p>
-					
-				<div class="col-md-2"></div>
-				
+					</div>--!>	
 				</div>
 			</div>
 		</div>
@@ -147,8 +193,9 @@
 		<footer>
 			<div class="container" style="padding-top: 40px;padding-bottom: 10px;">
 				<div class="row"> 
-					<div class="col-md-6" align="center"><i>Contact:</i><br/>caweeks@g.clemson.edu<br/>843.709.1595</div>
-					<div class="col-md-6" align-"center"><i>Github:</i><br/><a href="https://github.com/ChristianWeeks">www.github.com/ChristianWeeks</a></div>
+					<div class="col-md-3" align="center"><i>Contact:</i><br/>caweeks@g.clemson.edu<br/>843.709.1595</div>
+					<div class="col-md-3"><a href="https://github.com/ChristianWeeks"><img src="images/GitHub_Logo.png" class="gitLogo"/></div>
+					<div class="col-md-3"><a href="https://www.linkedin.com/pub/christian-weeks/47/921/365/en"><img src="images/LinkedIn_Logo.jpg" class="LILogo"/></div>
 				</div>
 			</div>
 			<div class="container-fluid ">
