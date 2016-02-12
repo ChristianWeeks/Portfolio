@@ -68,7 +68,7 @@
 		   <h1 class="codeTitle">Demo Reel</h1>
 		   <hr class="featurette-divider">
 			<div class="row">
-				<iframe src="https://player.vimeo.com/video/151164915" width="800" height="450" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
+				<iframe src="https://player.vimeo.com/video/155148821" width="800" height="450" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
 				<p align="center"><i> HD version available on Vimeo </i></p>
 			</div>
 			<div class="row">
@@ -81,22 +81,29 @@
 						<li>Lead rigger, animator, visual developer</li>
 						<li>Character designed and animated to look powerless and pathetic with his tiny hind shell, implying his sadness at the beginning</li>
 						<li>Small shell allowed him to emote like a dog, so he was animated as very flighty and excited</li>
+                        <li>
+                            <p class="captionTitle">Rigging Breakdown</p>
+                            <ul>
+                                <li>Claws and legs are hard body segments with reversible IK / FK controls</li>
+                                <li>Body is smoothly bound for smooth, exaggerated curves in spine, creating more expressive silhouettes</li>
+                                <li>Eyes smoothly bound.  Blend shapes for expressions, lattice controls for squash and stretch, and cluster controls along a curve in the eyestalk to control their arcs.</li>
+                                <li>Shell is detachable and full body lattice for squash and stretch</li>
+                            </ul>
 					</ul>
-					<p class="captionTitle">Rigging Breakdown</p>
-					<ul>
-						<li>Claws and legs are hard body segments with reversible IK / FK controls</li>
-						<li>Body is smoothly bound to allow for smooth, exaggerated curves in spine, creating more expressive silhouettes</li>
-						<li>Eyes also smoothly bound.  Use blend shapes for expressions, lattice controls for squash and stretch, and cluster controls along a curve in the eyestalk to control their arcs.</li>
-						<li>Shell is detachable and full body lattice allows for full body squash and stretch</li>
-						</ul>
+                    <h2 class="projectTitle">Procedural Hex Grid Topology</h2>
+                    <ul>
+                        <li>Created in Houdini</li>
+                        <li>Hex grid extruded with layered noise</li>
+                        <li>Height of extrusion fed into shader to alter attributes</li>
+                    </ul>
 					<h2 class="projectTitle">Galaxy Simulation</h2>
 					<ul>
 						<li>Art directable simulation of the <a href="https://en.wikipedia.org/wiki/N-body_problem">n-body problem</a> run with OpenGL and accelerated in OpenCL.  </li>
 						<li>9216 total particles. </li>
 						<li>Gravity force is calculated for each particle based on the mass and distance of other particles. </li>
 						<li>Art direction favored over physical accuracy, so a vector field was added to nudges particles into the form of spiral galaxies most people are familiar with.</li>
-						<li>Paramter input files allow for different simulations by altering features like the particle's initial position, the gravitational constant, and the strength of the vector field.</li>
-						</ul>
+						<li>Parameter input files allow for different simulations by altering features like the particle's initial position, the gravitational constant, and the strength of the vector field.</li>
+					</ul>
 					<h2 class="projectTitle">Hades Head</h2>
 					<p>Responsible for all assets except the audio, which is taken from Disney's <i>Hercules</i>.  I chose this particular sound segment because its potential for very expressive animation along with experimentation in fire effects.  Rigging is done mostly with joints on control curves with blend shapes.</p>
 					<h2 class="projectTitle">Craving Crustacean Visual Development</h2>
