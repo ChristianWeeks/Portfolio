@@ -68,7 +68,7 @@
 		   <h1 class="codeTitle">Demo Reel</h1>
 		   <hr class="featurette-divider">
 			<div class="row">
-				<iframe src="https://player.vimeo.com/video/159409031" width="800" height="450" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
+				<iframe src="https://player.vimeo.com/video/186421724" width="800" height="450" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
 				<p align="center"><i> HD version available on Vimeo </i></p>
 			</div>
 			<div class="row">
@@ -76,26 +76,6 @@
 				</div>
 				<div class="col-md-8">
 					<h1 class="codeTitle">Breakdown</h1>
-                    <h2 class="projectTitle">Rocket FX</h2>
-                    <ul>
-                        <li>Created in Houdini</li>
-                        <li>Rocket trail created by instantiating multiple pyro containers along the curve of the missile's trajectory</li>
-                        <li>Explosion created in a second simulation</li>
-                    </ul>
-                    <h2 class="projectTitle">Procedural Hex Grid Topology</h2>
-                    <ul>
-                        <li>Created in Houdini</li>
-                        <li>Hex grid extruded with layered noise</li>
-                        <li>Height of extrusion fed into shader to alter attributes</li>
-                    </ul>
-					<h2 class="projectTitle">Galaxy Simulation</h2>
-					<ul>
-						<li>Art directable simulation of the <a href="https://en.wikipedia.org/wiki/N-body_problem">n-body problem</a> run with OpenGL and accelerated in OpenCL.  </li>
-						<li>9216 total particles. </li>
-						<li>Gravity force is calculated for each particle based on the mass and distance of other particles. </li>
-						<li>Art direction favored over physical accuracy, so a vector field was added to nudges particles into the form of spiral galaxies most people are familiar with.</li>
-						<li>Parameter input files allow for different simulations by altering features like the particle's initial position, the gravitational constant, and the strength of the vector field.</li>
-					</ul>
 					<h2 class="projectTitle">Craving Crustacean</h2>
 					<ul>
 						<li>Lead rigger, animator, visual developer</li>
@@ -110,6 +90,36 @@
                                 <li>Shell is detachable and full body lattice for squash and stretch</li>
                             </ul>
 					</ul>
+                    <h2 class="projectTitle">Spawning Portal</h2>
+                    <ul>
+                        <li>Created in Houdini, Nuke</li>
+                        <li>Several particle simulations in Houdini composited in Nuke. Hex Grid was projected onto a rounded surface to bulge outward, with its visibility controlled by whether it was inside an expanding and contracting sphere.</li>
+                    </ul>
+                    <h2 class="projectTitle">Volumetric Ray Tracer - Wisp</h2>
+                    <ul>
+                        <li>Written in C++</li>
+                        <li>Custom volumetric ray tracer that uses standard techniques to calculate light extinction in a volume.  Wisp created by a technique that stamps density into a voxel gridby applying several layers of simplex noise to randomly distributed density dots along a unit sphere. </li>
+                    </ul>
+					<h2 class="projectTitle">Galaxy Simulation</h2>
+					<ul>
+						<li>Art directable simulation of the <a href="https://en.wikipedia.org/wiki/N-body_problem">n-body problem</a> run with OpenGL and accelerated in OpenCL.  </li>
+						<li>9216 total particles. </li>
+						<li>Gravity force is calculated for each particle based on the mass and distance of other particles. </li>
+						<li>Art direction favored over physical accuracy, so a vector field was added to nudges particles into the form of spiral galaxies most people are familiar with.</li>
+						<li>Parameter input files allow for different simulations by altering features like the particle's initial position, the gravitational constant, and the strength of the vector field.</li>
+					</ul>
+                    <h2 class="projectTitle">Procedural Hex Grid Topology</h2>
+                    <ul>
+                        <li>Created in Houdini</li>
+                        <li>Hex grid extruded with layered noise</li>
+                        <li>Height of extrusion fed into shader to alter attributes</li>
+                    </ul>
+                    <h2 class="projectTitle">Rocket FX</h2>
+                    <ul>
+                        <li>Created in Houdini</li>
+                        <li>Rocket trail created by instantiating multiple pyro containers along the curve of the missile's trajectory</li>
+                        <li>Explosion created in a second simulation</li>
+                    </ul>
 				</div>
 				<div class="col-md-2">
 				</div>
