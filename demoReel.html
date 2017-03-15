@@ -35,6 +35,7 @@
 				repeat: false,
 				useControls: true,
 				fixedControls: 'fit',
+                u
 				overlayOptions: {
 					opacity: 0.75,
 					position: 'bottom center',
@@ -58,7 +59,6 @@
 					<li class="navWidth navFont steel1"><a href="index.html" class="navFont">Home</a></li>
 					<li class="navWidth active darkActive"><a href="demoReel.html"style="color:black">Demo Reel</a></li>
 					<li class="navWidth navFont steel1"><a href="code.html" class="navFont">Projects</a></li>
-					<li class="navWidth navFont steel2"><a href="art.html"class="navFont">Art</a></li>
 			      </ul>
 			    </div>
 			  </div>
@@ -68,7 +68,7 @@
 		   <h1 class="codeTitle">Demo Reel</h1>
 		   <hr class="featurette-divider">
 			<div class="row">
-				<iframe src="https://player.vimeo.com/video/186421724" width="800" height="450" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
+				<iframe src="https://player.vimeo.com/video/207499800" width="800" height="450" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
 				<p align="center"><i> HD version available on Vimeo </i></p>
 			</div>
 			<div class="row">
@@ -76,41 +76,56 @@
 				</div>
 				<div class="col-md-8">
 					<h1 class="codeTitle">Breakdown</h1>
-					<h2 class="projectTitle">Craving Crustacean</h2>
+					<h2 class="projectTitle">Volumetric Hourglass Nebula</h2>
 					<ul>
-						<li>Lead rigger, animator, visual developer</li>
-						<li>Character designed and animated to look powerless and pathetic with his tiny hind shell, implying his sadness at the beginning</li>
-						<li>Small shell allowed him to emote like a dog, so he was animated as very flighty and excited</li>
+						<li>Pre-visualization done in Houdini.  Scene composition and camera movement are determined by using object primitives as placeholders.  Object positions are written out to .geo file</li>
+						<li>Simulation and rendering done with software I have written in C++.  Clouds, stored in sparse grids, are generate dby instantiating a combination of pyroclastic spheres, stamped noise, and volumetric wisps on positions read in from the .geo file. Several layers of gridded
+Semi-Lagrangian advection are applied to break them up. A final layer of gridless advection is
+applied at render time to remove any possible remaining grid artifacts. This final layer is animated
+to give very subtle movement to the clouds.</li>
+<li>Lighting on the clouds is done with multiple deep shadow maps.</li>
+                        <li>Compositing done in Nuke.  Color and conrast are increased and lense flares added.</li>
 					</ul>
-                    <h2 class="projectTitle">Spawning Portal</h2>
+                    <h2 class="projectTitle">Wisps</h2>
                     <ul>
-                        <li>Created in Houdini, Nuke</li>
-                        <li>Several particle simulations in Houdini composited in Nuke. Hex Grid was projected onto a rounded surface to bulge outward, with its visibility controlled by whether it was inside an expanding and contracting sphere.</li>
+                        <li>Raw renders of wisps generated with different parameters. Written in C++. Emission color is
+a function of voxel density. ImageMagick is used to write parameters in the top left corner so they
+can be replicated later.</li>
                     </ul>
-                    <h2 class="projectTitle">Volumetric Ray Tracer - Wisp</h2>
+                    <h2 class="projectTitle">Hexagon Islands</h2>
                     <ul>
-                        <li>Written in C++</li>
-                        <li>Custom volumetric ray tracer that uses standard techniques to calculate light extinction in a volume.  Wisp created by a technique that stamps density into a voxel gridby applying several layers of simplex noise to randomly distributed density dots along a unit sphere. </li>
+                        <li>A hexagonal grid with multiple layers of animated noise. Color is determined by height. Depth
+                        of field applied in Nuke by rendering out z-depth from Houdini.</li>
                     </ul>
-					<h2 class="projectTitle">Galaxy Simulation</h2>
+					<h2 class="projectTitle">Spawning Portal</h2>
+                    <ul>
+                        <li>Several particle simulations in Houdini composited in Nuke.</li>
+                        <li>POP axis force is used to create
+                        swirling motion.</li>
+                        <li> Hex Grid is projected onto a round surface to bulge outward, with its visibility
+                        controlled by an expanding and contracting sphere.</li>
+                    </ul>
+                    <h2 class="projectTitle">Missile Explosion</h2>
+                    <ul>
+                        <li>Pyro simulation in Houdini</li>
+                        <li>Rocket trail created by instantiating multiple pyro containers along the curve of the missile's trajectory</li>
+                        <li>Explosion created in a second simulation</li>
+                    </ul>
+					<h2 class="projectTitle">N-Bodies Gravity Simulation</h2>
 					<ul>
 						<li>Art directable simulation of the <a href="https://en.wikipedia.org/wiki/N-body_problem">n-body problem</a> run with OpenGL and accelerated in OpenCL.  </li>
 						<li>9216 total particles. </li>
-						<li>Gravity force is calculated for each particle based on the mass and distance of other particles. </li>
-						<li>Art direction favored over physical accuracy, so a vector field was added to nudges particles into the form of spiral galaxies most people are familiar with.</li>
-						<li>Parameter input files allow for different simulations by altering features like the particle's initial position, the gravitational constant, and the strength of the vector field.</li>
+						<li>To reduce calculations, every frame the
+scene is divided into a grid, mass is accumulated in every voxel, and a center of gravity calculated.
+Force is then calculated with these values to determine acceleration and velocity. </li>
+                        <li>Runge-Kutta integration is required to maintain stabile orbits.</li>
 					</ul>
-                    <h2 class="projectTitle">Procedural Hex Grid Topology</h2>
+                    <h2 class="projectTitle">Craving Crustacean</h2>
                     <ul>
-                        <li>Created in Houdini</li>
-                        <li>Hex grid extruded with layered noise</li>
-                        <li>Height of extrusion fed into shader to alter attributes</li>
-                    </ul>
-                    <h2 class="projectTitle">Rocket FX</h2>
-                    <ul>
-                        <li>Created in Houdini</li>
-                        <li>Rocket trail created by instantiating multiple pyro containers along the curve of the missile's trajectory</li>
-                        <li>Explosion created in a second simulation</li>
+                        <li>Lead rigger, animator, and visual developer for this project</li>
+                        <li>The character was designed and animated to look powerless and pathetic with his tiny hind shell,
+                        implying his sadness and desire for a larger shell.</li>
+                        <li>The small shell allowed him to emote like a dog, so he was animated as very flighty and excited.</li>
                     </ul>
 				</div>
 				<div class="col-md-2">
