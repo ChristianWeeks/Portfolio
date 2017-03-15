@@ -216,6 +216,7 @@ textarea {
 	vertical-align: middle;
 	margin-left: auto;
 	margin-right: auto;
+	border-radius: 4px;
 	
 	-webkit-transition: all .4s ease-in-out;
 	-moz-transition: all .4s ease-in-out;
@@ -229,10 +230,6 @@ textarea {
 }
 .displayRow{
 
-	margin-top: 5px;
-	margin-bottom: 5px;
-	padding-top: 5px;
-	padding-bottom: 5px;
 	height: 250px;
 	display: table-cell;
 }
@@ -249,16 +246,10 @@ textarea {
 }
 
 .displayCaption{
-	margin-top: 15px;
-	margin-bottom: 15px;
-	height: 150px;
-	padding-left: 5px;
-	padding-right: 5px;
+	height: 200px;
 }
 .displayCell{
 	height: 200px;
-	width: 200px;
-	border-radius: 8px;
 }
 .displayCellLarge{
 	margin-top: 15px;
